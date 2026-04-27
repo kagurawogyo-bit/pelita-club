@@ -71,7 +71,7 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
               <input type="text" name="nik" defaultValue={user.profile?.nik || ""} className="input-field" pattern="[0-9]{16}" title="NIK harus 16 digit angka" />
             </div>
             <div className="input-group">
-              <label className="input-label">Sekolah Asal</label>
+              <label className="input-label">Asal Sekolah</label>
               <input type="text" name="sekolahAsal" defaultValue={user.profile?.sekolahAsal || ""} className="input-field" placeholder="Nama sekolah" />
             </div>
             <div className="input-group">
