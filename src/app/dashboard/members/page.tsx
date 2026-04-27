@@ -73,6 +73,9 @@ export default async function MembersPage() {
     // No fallback, show empty table
   }
 
+  // Sort A-Z
+  formattedStudents.sort((a, b) => a.namaLengkap.localeCompare(b.namaLengkap));
+
   return (
     <div className="animate-fade-in" style={{ maxWidth: '1400px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
