@@ -1,0 +1,145 @@
+
+> temp@0.1.0 lint
+> eslint
+
+
+D:\data pelita\src\app\(public)\login\page.tsx
+  62:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  62:18  warning  Unused eslint-disable directive (no problems were reported from '@next/next/no-img-element')
+
+D:\data pelita\src\app\(public)\page.tsx
+  67:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  67:18  warning  Unused eslint-disable directive (no problems were reported from '@next/next/no-img-element')
+
+D:\data pelita\src\app\api\attendance\coaches\route.ts
+  18:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\attendance\route.ts
+  6:28  warning  'req' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\attendance\session\route.ts
+  118:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+  123:30  warning  'req' is defined but never used    @typescript-eslint/no-unused-vars
+  136:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\auth\forgot-password\check-email\route.ts
+  23:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\auth\me\route.ts
+  30:13  warning  'password' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  33:12  warning  'error' is defined but never used              @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\users\[id]\route.ts
+  29:12  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+  75:12  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\attendance\pelatih\page.tsx
+  33:7  error  'formattedCoaches' is never reassigned. Use 'const' instead  prefer-const
+
+D:\data pelita\src\app\dashboard\attendance\scan\page.tsx
+   39:37  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   51:44  warning  '_' is defined but never used             @typescript-eslint/no-unused-vars
+  133:14  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\attendance\session\page.tsx
+  12:42  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+  61:5   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\data pelita\src\app\dashboard\attendance\session\page.tsx:61:5
+  59 |
+  60 |   useEffect(() => {
+> 61 |     fetchActiveSession();
+     |     ^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  62 |     fetchCoaches();
+  63 |   }, []);
+  64 |  react-hooks/set-state-in-effect
+
+D:\data pelita\src\app\dashboard\members\page.tsx
+  35:7  error  'formattedStudents' is never reassigned. Use 'const' instead  prefer-const
+
+D:\data pelita\src\app\dashboard\page.tsx
+  12:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\pengurus\page.tsx
+  18:12  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\profile\edit\page.tsx
+  19:16  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\profile\page.tsx
+  19:16  warning  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\senior\page.tsx
+  18:12  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\settings\page.tsx
+   7:9   warning  'router' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @typescript-eslint/no-unused-vars
+   8:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-explicit-any
+  23:46  warning  Unused eslint-disable directive (no problems were reported from '@typescript-eslint/no-explicit-any')
+  34:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\data pelita\src\app\dashboard\settings\page.tsx:34:5
+  32 |
+  33 |   useEffect(() => {
+> 34 |     fetchStudents();
+     |     ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  35 |   }, [fetchStudents]);
+  36 |
+  37 |   const toggleSelect = (id: string) => {  react-hooks/set-state-in-effect
+
+D:\data pelita\src\components\AttendanceManager.tsx
+   5:11  warning  'Student' is defined but never used       @typescript-eslint/no-unused-vars
+  19:20  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\components\DashboardNav.tsx
+  36:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  36:16  warning  Unused eslint-disable directive (no problems were reported from '@next/next/no-img-element')
+
+D:\data pelita\src\components\PengurusTable.tsx
+   6:73  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  45:14  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\components\SeniorTable.tsx
+   6:71  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\components\StudentTable.tsx
+  7:64  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\components\ThemeToggle.tsx
+  11:7  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/exhaustive-deps')
+  12:7  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\data pelita\src\components\ThemeToggle.tsx:12:7
+  10 |     if (savedTheme) {
+  11 |       // eslint-disable-next-line react-hooks/exhaustive-deps
+> 12 |       setTheme(savedTheme);
+     |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  13 |       document.documentElement.setAttribute("data-theme", savedTheme);
+  14 |     }
+  15 |   }, []);  react-hooks/set-state-in-effect
+
+D:\data pelita\src\lib\jwt.ts
+  16:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 42 problems (13 errors, 29 warnings)
+  2 errors and 5 warnings potentially fixable with the `--fix` option.
+

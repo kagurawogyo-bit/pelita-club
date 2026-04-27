@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+
+model User {
+  id        String       @id @default(uuid())
+  email     String       @unique
+  password  String
+  role      String       // "SISWA", "SENIOR", "PENGURUS"
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  profile   Profile?
+  attendances Attendance[]
+  gridAttendances GridAttendance[]
+  coachSessions   AttendanceSession[] @relation("CoachSessions")
+}
+
+model AttendanceSession {
+  id          String   @id @default(uuid())
+  coachId     String
+  coach       User     @relation("CoachSessions", fields: [coachId], references: [id], onDelete: Cascade)
+  coachIds    String   @default("") // Comma-separated user IDs of all coaches in this session
+  column      String   // "M1P1", "M2P3", etc.
+  month       Int
+  year        Int
+  isActive    Boolean  @default(true)
+  expiresAt   DateTime
+  createdAt   DateTime @default(now())
+}
+
+model Profile {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  namaLengkap   String
+  namaPanggilan String?
+  tempatLahir   String?
+  tanggalLahir  DateTime?
+  agama         String?
+  jenisKelamin  String?
+  alamat        String?
+  nik           String?  @unique
+  tinggiBadan   Float?
+  beratBadan    Float?
+  namaAyah      String?
+  namaIbu       String?
+  nomorHp       String?
+  sekolahAsal   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Attendance {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date      DateTime
+  status    String   // "HADIR", "IZIN", "SAKIT", "ALPA"
+  notes     String?
+  createdAt DateTime @default(now())
+
+  @@unique([userId, date])
+}
+
+model GridAttendance {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  month     Int
+  year      Int
+  column    String   // "M1P1", etc.
+  status    String   // "✓", "S", "I", "A", "-"
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, month, year, column])
+}

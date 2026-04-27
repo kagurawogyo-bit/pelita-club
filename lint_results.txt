@@ -1,0 +1,1001 @@
+
+> temp@0.1.0 lint
+> eslint
+
+
+D:\data pelita\brain\6738bd53-268d-4d91-bc7e-dcee4dc87b0a\scratch\add_coaches.js
+   1:26  error    A `require()` style import is forbidden    @typescript-eslint/no-require-imports
+   2:16  error    A `require()` style import is forbidden    @typescript-eslint/no-require-imports
+  20:13  warning  'user' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\brain\6738bd53-268d-4d91-bc7e-dcee4dc87b0a\scratch\check_all_users.js
+  1:26  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+D:\data pelita\brain\6738bd53-268d-4d91-bc7e-dcee4dc87b0a\scratch\check_coaches.js
+  1:26  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+D:\data pelita\brain\6738bd53-268d-4d91-bc7e-dcee4dc87b0a\scratch\check_prisma_db.js
+  1:26  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+D:\data pelita\brain\6738bd53-268d-4d91-bc7e-dcee4dc87b0a\scratch\check_root_db.js
+  1:26  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+D:\data pelita\create-admin.js
+   1:26  error    A `require()` style import is forbidden       @typescript-eslint/no-require-imports
+   2:16  error    A `require()` style import is forbidden       @typescript-eslint/no-require-imports
+  10:9   warning  'newUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\create_admin.js
+  1:26  error    A `require()` style import is forbidden     @typescript-eslint/no-require-imports
+  2:16  error    A `require()` style import is forbidden     @typescript-eslint/no-require-imports
+  8:9   warning  'admin' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\delete_all_users.js
+  1:26  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+D:\data pelita\scratch\check_students.js
+  1:26  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+D:\data pelita\src\app\(public)\forgot-password\page.tsx
+  35:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  67:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\(public)\login\page.tsx
+  34:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  62:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+D:\data pelita\src\app\(public)\page.tsx
+  34:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  67:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+D:\data pelita\src\app\(public)\register\page.tsx
+  36:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\api\attendance\coaches\route.ts
+  18:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\attendance\qr-checkin\route.ts
+   13:20  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\api\attendance\route.ts
+   6:28  warning  'req' is defined but never used           @typescript-eslint/no-unused-vars
+  49:19  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\api\attendance\session\route.ts
+   13:20  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   31:25  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   58:25  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   62:19  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  101:20  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  118:12  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  123:30  warning  'req' is defined but never used           @typescript-eslint/no-unused-vars
+  128:24  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  136:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\auth\forgot-password\check-email\route.ts
+  23:12  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\auth\login\route.ts
+  38:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\api\auth\me\route.ts
+  30:13  warning  'password' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  33:12  warning  'error' is defined but never used              @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\api\auth\register\route.ts
+  68:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\api\reports\route.ts
+  78:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\api\users\[id]\route.ts
+  16:20  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  29:12  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+  44:20  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  75:12  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\attendance\page.tsx
+  13:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\attendance\pelatih\page.tsx
+  13:18  error  Unexpected any. Specify a different type                     @typescript-eslint/no-explicit-any
+  33:7   error  'formattedCoaches' is never reassigned. Use 'const' instead  prefer-const
+
+D:\data pelita\src\app\dashboard\attendance\scan\page.tsx
+   39:37  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+   42:54  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+   49:7   error    Error: Cannot access variable before it is declared
+
+`cleanupScanner` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+D:\data pelita\src\app\dashboard\attendance\scan\page.tsx:49:7
+  47 |     return () => {
+  48 |       isMountedRef.current = false;
+> 49 |       cleanupScanner();
+     |       ^^^^^^^^^^^^^^ `cleanupScanner` accessed before it is declared
+  50 |     };
+  51 |   }, []);
+  52 |
+
+D:\data pelita\src\app\dashboard\attendance\scan\page.tsx:53:3
+  51 |   }, []);
+  52 |
+> 53 |   const cleanupScanner = useCallback(() => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 54 |     const instance = scannerInstanceRef.current;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 55 |     if (instance) {
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 62 |     }
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 63 |   }, []);
+     | ^^^^^^^^^^ `cleanupScanner` is declared here
+  64 |
+  65 |   const fetchSessionInfo = async (sessionId: string) => {
+  66 |     setLoadingSession(true);  react-hooks/immutability
+   51:6   warning  React Hook useEffect has a missing dependency: 'cleanupScanner'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/exhaustive-deps
+   53:38  error    Compilation Skipped: Existing memoization could not be preserved
+
+React Compiler has skipped optimizing this component because the existing manual memoization could not be preserved. This value was memoized in source but not in compilation output.
+
+D:\data pelita\src\app\dashboard\attendance\scan\page.tsx:53:38
+  51 |   }, []);
+  52 |
+> 53 |   const cleanupScanner = useCallback(() => {
+     |                                      ^^^^^^^
+> 54 |     const instance = scannerInstanceRef.current;
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 55 |     if (instance) {
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 62 |     }
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 63 |   }, []);
+     | ^^^^ Could not preserve existing memoization
+  64 |
+  65 |   const fetchSessionInfo = async (sessionId: string) => {
+  66 |     setLoadingSession(true);                                                                                                                                                                                                                           react-hooks/preserve-manual-memoization
+   59:44  warning  '_' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+   75:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  101:25  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  133:14  warning  'err' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  133:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  172:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\attendance\session\page.tsx
+   7:54  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+  12:42  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+  37:5   error  Error: Cannot access variable before it is declared
+
+`fetchActiveSession` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+D:\data pelita\src\app\dashboard\attendance\session\page.tsx:37:5
+  35 |
+  36 |   useEffect(() => {
+> 37 |     fetchActiveSession();
+     |     ^^^^^^^^^^^^^^^^^^ `fetchActiveSession` accessed before it is declared
+  38 |     fetchCoaches();
+  39 |   }, []);
+  40 |
+
+D:\data pelita\src\app\dashboard\attendance\session\page.tsx:41:3
+  39 |   }, []);
+  40 |
+> 41 |   const fetchActiveSession = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 42 |     try {
+     | ^^^^^^^^^
+> 43 |       const res = await fetch("/api/attendance/session");
+     …
+     | ^^^^^^^^^
+> 50 |     }
+     | ^^^^^^^^^
+> 51 |   };
+     | ^^^^^ `fetchActiveSession` is declared here
+  52 |
+  53 |   const fetchCoaches = async () => {
+  54 |     try {                                       react-hooks/immutability
+  38:5   error  Error: Cannot access variable before it is declared
+
+`fetchCoaches` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+D:\data pelita\src\app\dashboard\attendance\session\page.tsx:38:5
+  36 |   useEffect(() => {
+  37 |     fetchActiveSession();
+> 38 |     fetchCoaches();
+     |     ^^^^^^^^^^^^ `fetchCoaches` accessed before it is declared
+  39 |   }, []);
+  40 |
+  41 |   const fetchActiveSession = async () => {
+
+D:\data pelita\src\app\dashboard\attendance\session\page.tsx:53:3
+  51 |   };
+  52 |
+> 53 |   const fetchCoaches = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 54 |     try {
+     | ^^^^^^^^^
+> 55 |       const res = await fetch("/api/attendance/coaches");
+     …
+     | ^^^^^^^^^
+> 62 |     }
+     | ^^^^^^^^^
+> 63 |   };
+     | ^^^^^ `fetchCoaches` is declared here
+  64 |
+  65 |   const toggleCoachSelection = (id: string) => {
+  66 |     setSelectedCoachIds(prev =>   react-hooks/immutability
+  95:19  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\layout.tsx
+  18:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\members\add\page.tsx
+  38:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\members\page.tsx
+  13:18  error  Unexpected any. Specify a different type                      @typescript-eslint/no-explicit-any
+  35:7   error  'formattedStudents' is never reassigned. Use 'const' instead  prefer-const
+
+D:\data pelita\src\app\dashboard\page.tsx
+  12:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\pengurus\add\page.tsx
+  37:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\pengurus\page.tsx
+  15:16  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:12  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\profile\edit\page.tsx
+   9:36  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:16  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\profile\page.tsx
+   9:36  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  19:16  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\reports\page.tsx
+  29:5  error    Error: Cannot access variable before it is declared
+
+`fetchReport` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+D:\data pelita\src\app\dashboard\reports\page.tsx:29:5
+  27 |
+  28 |   useEffect(() => {
+> 29 |     fetchReport();
+     |     ^^^^^^^^^^^ `fetchReport` accessed before it is declared
+  30 |   }, [month, year, activeRole]);
+  31 |
+  32 |   const fetchReport = async () => {
+
+D:\data pelita\src\app\dashboard\reports\page.tsx:32:3
+  30 |   }, [month, year, activeRole]);
+  31 |
+> 32 |   const fetchReport = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 33 |     setLoading(true);
+     | ^^^^^^^^^^^^^^^^^^^^^
+> 34 |     try {
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^
+> 42 |     }
+     | ^^^^^^^^^^^^^^^^^^^^^
+> 43 |   };
+     | ^^^^^ `fetchReport` is declared here
+  44 |
+  45 |   const getStatusColor = (percentage: number) => {
+  46 |     if (percentage >= 80) return "#10b981"; // Good  react-hooks/immutability
+  30:6  warning  React Hook useEffect has a missing dependency: 'fetchReport'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-hooks/exhaustive-deps
+
+D:\data pelita\src\app\dashboard\senior\add\page.tsx
+  37:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\app\dashboard\senior\page.tsx
+  15:16  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:12  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\app\dashboard\settings\page.tsx
+   7:9   warning  'router' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 @typescript-eslint/no-unused-vars
+   8:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+  17:5   error    Error: Cannot access variable before it is declared
+
+`fetchStudents` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+D:\data pelita\src\app\dashboard\settings\page.tsx:17:5
+  15 |
+  16 |   useEffect(() => {
+> 17 |     fetchStudents();
+     |     ^^^^^^^^^^^^^ `fetchStudents` accessed before it is declared
+  18 |   }, []);
+  19 |
+  20 |   const fetchStudents = async () => {
+
+D:\data pelita\src\app\dashboard\settings\page.tsx:20:3
+  18 |   }, []);
+  19 |
+> 20 |   const fetchStudents = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 21 |     setFetchLoading(true);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 22 |     try {
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 34 |     }
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 35 |   };
+     | ^^^^^ `fetchStudents` is declared here
+  36 |
+  37 |   const toggleSelect = (id: string) => {
+  38 |     setSelectedIds(prev =>   react-hooks/immutability
+  27:42  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+  27:50  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+  75:19  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\components\AttendanceManager.tsx
+    5:11  warning  'Student' is defined but never used       @typescript-eslint/no-unused-vars
+   19:20  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  296:48  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\components\DashboardNav.tsx
+  34:11  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @next/next/no-img-element
+  45:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:45:16
+  43 |           {role === "SENIOR" ? (
+  44 |             <>
+> 45 |               <SectionLabel label="BIODATA" />
+     |                ^^^^^^^^^^^^ This component is created during render
+  46 |               <NavItem href="/dashboard/profile" icon="👤" label="Profil Saya" />
+  47 |             </>
+  48 |           ) : (
+
+D:\data pelita\src\components\DashboardNav.tsx:23:24
+  21 |
+  22 |
+> 23 |   const SectionLabel = ({ label }: { label: string }) => (
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |     <div className="nav-section-label">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |       {label}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |   );
+     | ^^^^ The component is created during render here
+  28 |
+  29 |   return (
+  30 |     <aside className="glass-sidebar" style={{ width: '100%', display: 'flex', flexDirection: 'column', height: '100vh' }}>                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/static-components
+  46:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:46:16
+  44 |             <>
+  45 |               <SectionLabel label="BIODATA" />
+> 46 |               <NavItem href="/dashboard/profile" icon="👤" label="Profil Saya" />
+     |                ^^^^^^^ This component is created during render
+  47 |             </>
+  48 |           ) : (
+  49 |             <>
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                                                                                                                                                                                                     react-hooks/static-components
+  50:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:50:16
+  48 |           ) : (
+  49 |             <>
+> 50 |               <SectionLabel label="MENU UTAMA" />
+     |                ^^^^^^^^^^^^ This component is created during render
+  51 |               <NavItem href="/dashboard" icon="🏠" label="Dashboard" />
+  52 |               {role === "PENGURUS" && <NavItem href="/dashboard/members" icon="👥" label="Data Siswa" />}
+  53 |
+
+D:\data pelita\src\components\DashboardNav.tsx:23:24
+  21 |
+  22 |
+> 23 |   const SectionLabel = ({ label }: { label: string }) => (
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |     <div className="nav-section-label">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |       {label}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |   );
+     | ^^^^ The component is created during render here
+  28 |
+  29 |   return (
+  30 |     <aside className="glass-sidebar" style={{ width: '100%', display: 'flex', flexDirection: 'column', height: '100vh' }}>                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/static-components
+  51:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:51:16
+  49 |             <>
+  50 |               <SectionLabel label="MENU UTAMA" />
+> 51 |               <NavItem href="/dashboard" icon="🏠" label="Dashboard" />
+     |                ^^^^^^^ This component is created during render
+  52 |               {role === "PENGURUS" && <NavItem href="/dashboard/members" icon="👥" label="Data Siswa" />}
+  53 |
+  54 |               <SectionLabel label="KEHADIRAN" />
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                                                                                                react-hooks/static-components
+  52:40  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:52:40
+  50 |               <SectionLabel label="MENU UTAMA" />
+  51 |               <NavItem href="/dashboard" icon="🏠" label="Dashboard" />
+> 52 |               {role === "PENGURUS" && <NavItem href="/dashboard/members" icon="👥" label="Data Siswa" />}
+     |                                        ^^^^^^^ This component is created during render
+  53 |
+  54 |               <SectionLabel label="KEHADIRAN" />
+  55 |               <NavItem href="/dashboard/attendance" icon="📋" label="Absen Siswa" />
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (  react-hooks/static-components
+  54:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:54:16
+  52 |               {role === "PENGURUS" && <NavItem href="/dashboard/members" icon="👥" label="Data Siswa" />}
+  53 |
+> 54 |               <SectionLabel label="KEHADIRAN" />
+     |                ^^^^^^^^^^^^ This component is created during render
+  55 |               <NavItem href="/dashboard/attendance" icon="📋" label="Absen Siswa" />
+  56 |               <NavItem href="/dashboard/attendance/scan" icon="📷" label="Scan QR Absen" />
+  57 |               {role === "PENGURUS" && (
+
+D:\data pelita\src\components\DashboardNav.tsx:23:24
+  21 |
+  22 |
+> 23 |   const SectionLabel = ({ label }: { label: string }) => (
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |     <div className="nav-section-label">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |       {label}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |   );
+     | ^^^^ The component is created during render here
+  28 |
+  29 |   return (
+  30 |     <aside className="glass-sidebar" style={{ width: '100%', display: 'flex', flexDirection: 'column', height: '100vh' }}>                                                                                                                                                                                                                                                                                               react-hooks/static-components
+  55:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:55:16
+  53 |
+  54 |               <SectionLabel label="KEHADIRAN" />
+> 55 |               <NavItem href="/dashboard/attendance" icon="📋" label="Absen Siswa" />
+     |                ^^^^^^^ This component is created during render
+  56 |               <NavItem href="/dashboard/attendance/scan" icon="📷" label="Scan QR Absen" />
+  57 |               {role === "PENGURUS" && (
+  58 |                 <>
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                                                                                                       react-hooks/static-components
+  56:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:56:16
+  54 |               <SectionLabel label="KEHADIRAN" />
+  55 |               <NavItem href="/dashboard/attendance" icon="📋" label="Absen Siswa" />
+> 56 |               <NavItem href="/dashboard/attendance/scan" icon="📷" label="Scan QR Absen" />
+     |                ^^^^^^^ This component is created during render
+  57 |               {role === "PENGURUS" && (
+  58 |                 <>
+  59 |                   <NavItem href="/dashboard/attendance/session" icon="🎫" label="Sesi QR" />
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (          react-hooks/static-components
+  59:20  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:59:20
+  57 |               {role === "PENGURUS" && (
+  58 |                 <>
+> 59 |                   <NavItem href="/dashboard/attendance/session" icon="🎫" label="Sesi QR" />
+     |                    ^^^^^^^ This component is created during render
+  60 |                   <NavItem href="/dashboard/attendance/pelatih" icon="📋" label="Absen Pelatih" />
+  61 |                   <NavItem href="/dashboard/reports" icon="📊" label="Rekap Absensi" />
+  62 |                 </>
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                         react-hooks/static-components
+  60:20  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:60:20
+  58 |                 <>
+  59 |                   <NavItem href="/dashboard/attendance/session" icon="🎫" label="Sesi QR" />
+> 60 |                   <NavItem href="/dashboard/attendance/pelatih" icon="📋" label="Absen Pelatih" />
+     |                    ^^^^^^^ This component is created during render
+  61 |                   <NavItem href="/dashboard/reports" icon="📊" label="Rekap Absensi" />
+  62 |                 </>
+  63 |               )}
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                                                react-hooks/static-components
+  61:20  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:61:20
+  59 |                   <NavItem href="/dashboard/attendance/session" icon="🎫" label="Sesi QR" />
+  60 |                   <NavItem href="/dashboard/attendance/pelatih" icon="📋" label="Absen Pelatih" />
+> 61 |                   <NavItem href="/dashboard/reports" icon="📊" label="Rekap Absensi" />
+     |                    ^^^^^^^ This component is created during render
+  62 |                 </>
+  63 |               )}
+  64 |
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                                                                   react-hooks/static-components
+  65:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:65:16
+  63 |               )}
+  64 |
+> 65 |               <SectionLabel label="BIODATA" />
+     |                ^^^^^^^^^^^^ This component is created during render
+  66 |               <NavItem href="/dashboard/profile" icon="👤" label="Profil Saya" />
+  67 |               {role === "PENGURUS" && (
+  68 |                 <>
+
+D:\data pelita\src\components\DashboardNav.tsx:23:24
+  21 |
+  22 |
+> 23 |   const SectionLabel = ({ label }: { label: string }) => (
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |     <div className="nav-section-label">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |       {label}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |   );
+     | ^^^^ The component is created during render here
+  28 |
+  29 |   return (
+  30 |     <aside className="glass-sidebar" style={{ width: '100%', display: 'flex', flexDirection: 'column', height: '100vh' }}>                                                                                                                                                                                                                                                                                                                                                                                                                                                                      react-hooks/static-components
+  66:16  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:66:16
+  64 |
+  65 |               <SectionLabel label="BIODATA" />
+> 66 |               <NavItem href="/dashboard/profile" icon="👤" label="Profil Saya" />
+     |                ^^^^^^^ This component is created during render
+  67 |               {role === "PENGURUS" && (
+  68 |                 <>
+  69 |                   <NavItem href="/dashboard/pengurus" icon="💼" label="Pengurus" />
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                                                                                                                    react-hooks/static-components
+  69:20  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:69:20
+  67 |               {role === "PENGURUS" && (
+  68 |                 <>
+> 69 |                   <NavItem href="/dashboard/pengurus" icon="💼" label="Pengurus" />
+     |                    ^^^^^^^ This component is created during render
+  70 |                   <NavItem href="/dashboard/senior" icon="🏅" label="Senior" />
+  71 |                   <SectionLabel label="PENGATURAN" />
+  72 |                   <NavItem href="/dashboard/settings" icon="⚙️" label="Reset Akun Siswa" />
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (               react-hooks/static-components
+  70:20  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:70:20
+  68 |                 <>
+  69 |                   <NavItem href="/dashboard/pengurus" icon="💼" label="Pengurus" />
+> 70 |                   <NavItem href="/dashboard/senior" icon="🏅" label="Senior" />
+     |                    ^^^^^^^ This component is created during render
+  71 |                   <SectionLabel label="PENGATURAN" />
+  72 |                   <NavItem href="/dashboard/settings" icon="⚙️" label="Reset Akun Siswa" />
+  73 |                 </>
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                                   react-hooks/static-components
+  71:20  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:71:20
+  69 |                   <NavItem href="/dashboard/pengurus" icon="💼" label="Pengurus" />
+  70 |                   <NavItem href="/dashboard/senior" icon="🏅" label="Senior" />
+> 71 |                   <SectionLabel label="PENGATURAN" />
+     |                    ^^^^^^^^^^^^ This component is created during render
+  72 |                   <NavItem href="/dashboard/settings" icon="⚙️" label="Reset Akun Siswa" />
+  73 |                 </>
+  74 |               )}
+
+D:\data pelita\src\components\DashboardNav.tsx:23:24
+  21 |
+  22 |
+> 23 |   const SectionLabel = ({ label }: { label: string }) => (
+     |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |     <div className="nav-section-label">
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |       {label}
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |     </div>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |   );
+     | ^^^^ The component is created during render here
+  28 |
+  29 |   return (
+  30 |     <aside className="glass-sidebar" style={{ width: '100%', display: 'flex', flexDirection: 'column', height: '100vh' }}>                                                                                                                                                                                                                                                                                                                    react-hooks/static-components
+  72:20  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+D:\data pelita\src\components\DashboardNav.tsx:72:20
+  70 |                   <NavItem href="/dashboard/senior" icon="🏅" label="Senior" />
+  71 |                   <SectionLabel label="PENGATURAN" />
+> 72 |                   <NavItem href="/dashboard/settings" icon="⚙️" label="Reset Akun Siswa" />
+     |                    ^^^^^^^ This component is created during render
+  73 |                 </>
+  74 |               )}
+  75 |             </>
+
+D:\data pelita\src\components\DashboardNav.tsx:11:19
+   9 |   const isActive = (path: string) => pathname === path;
+  10 |
+> 11 |   const NavItem = ({ href, icon, label }: { href: string, icon: React.ReactNode, label: string }) => (
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 12 |     <Link 
+     | ^^^^^^^^^^
+> 13 |       href={href} 
+     | ^^^^^^^^^^
+> 14 |       className={`nav-item ${isActive(href) ? 'active' : ''}`}
+     | ^^^^^^^^^^
+> 15 |       onClick={onNavClick}
+     | ^^^^^^^^^^
+> 16 |     >
+     | ^^^^^^^^^^
+> 17 |       <span className="nav-icon">{icon}</span>
+     | ^^^^^^^^^^
+> 18 |       <span className="nav-label">{label}</span>
+     | ^^^^^^^^^^
+> 19 |     </Link>
+     | ^^^^^^^^^^
+> 20 |   );
+     | ^^^^ The component is created during render here
+  21 |
+  22 |
+  23 |   const SectionLabel = ({ label }: { label: string }) => (                                                                                                         react-hooks/static-components
+
+D:\data pelita\src\components\PengurusTable.tsx
+   6:73  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  45:14  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\components\SeniorTable.tsx
+   6:71  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  39:33  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+D:\data pelita\src\components\StudentTable.tsx
+  7:64  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\components\ThemeToggle.tsx
+  11:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\data pelita\src\components\ThemeToggle.tsx:11:7
+   9 |     const savedTheme = localStorage.getItem("theme") as "light" | "dark";
+  10 |     if (savedTheme) {
+> 11 |       setTheme(savedTheme);
+     |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  12 |       document.documentElement.setAttribute("data-theme", savedTheme);
+  13 |     }
+  14 |   }, []);  react-hooks/set-state-in-effect
+
+D:\data pelita\src\components\UserActions.tsx
+  23:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\components\UserEditForm.tsx
+   6:80  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  30:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+D:\data pelita\src\lib\jwt.ts
+   9:36  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  16:12  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+✖ 121 problems (92 errors, 29 warnings)
+  2 errors and 0 warnings potentially fixable with the `--fix` option.
+
