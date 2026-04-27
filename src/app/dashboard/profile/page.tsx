@@ -71,6 +71,7 @@ export default function ProfilePage() {
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Tempat, Tanggal Lahir</strong> {user.profile.tempatLahir || '-'}, {user.profile.tanggalLahir ? new Date(user.profile.tanggalLahir).toLocaleDateString('id-ID') : '-'}</div>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Jenis Kelamin</strong> {user.profile.jenisKelamin === 'LAKI_LAKI' ? 'Laki-laki' : user.profile.jenisKelamin === 'PEREMPUAN' ? 'Perempuan' : '-'}</div>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Agama</strong> {user.profile.agama || '-'}</div>
+              <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Sekolah Asal</strong> {user.profile.sekolahAsal || '-'}</div>
               <div className="grid-cols-2">
                 <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Tinggi Badan</strong> {user.profile.tinggiBadan || '-'} cm</div>
                 <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Berat Badan</strong> {user.profile.beratBadan || '-'} kg</div>
