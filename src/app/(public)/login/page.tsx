@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
@@ -8,9 +8,29 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const [captchaAnswer, setCaptchaAnswer] = useState("");
+
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const generateCaptcha = () => {
+    setNum1(Math.floor(Math.random() * 10) + 1);
+    setNum2(Math.floor(Math.random() * 10) + 1);
+    setCaptchaAnswer("");
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (parseInt(captchaAnswer) !== num1 + num2) {
+      setError("Jawaban keamanan salah. Silakan coba lagi.");
+      generateCaptcha();
+      return;
+    }
+
     setLoading(true);
     setError("");
 
@@ -128,10 +148,29 @@ export default function Login() {
             </div>
           </div>
 
-          <div style={{ textAlign: 'right', marginBottom: '28px' }}>
+          <div style={{ textAlign: 'right', marginBottom: '20px' }}>
             <a href="/forgot-password" style={{ color: 'rgba(249,115,22,0.8)', fontSize: '0.82rem', fontWeight: 600 }}>
               Lupa password?
             </a>
+          </div>
+
+          <div className="input-group" style={{ marginBottom: '28px' }}>
+            <label style={{ fontSize: '0.75rem', fontWeight: 700, color: 'rgba(148,163,184,0.9)', letterSpacing: '0.1em' }}>
+              KEAMANAN: BERAPA HASIL {num1} + {num2}? <span style={{ color: '#ef4444' }}>*</span>
+            </label>
+            <input
+              type="number" required
+              value={captchaAnswer}
+              onChange={(e) => setCaptchaAnswer(e.target.value)}
+              className="input-field"
+              placeholder="Masukkan jawaban"
+              style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                color: 'white',
+                borderRadius: '12px',
+              }}
+            />
           </div>
 
           <button
