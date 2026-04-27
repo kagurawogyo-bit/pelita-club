@@ -139,6 +139,11 @@ export default function Register() {
               <input type="text" name="nik" className="input-field" placeholder="16 Digit NIK (Opsional)" pattern="[0-9]{16}" title="Masukkan 16 digit NIK" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: 'white' }} />
             </div>
             <div className="input-group">
+              <label className="input-label" style={{ color: '#8b9bb4' }}>Sekolah Asal <span style={{ color: 'var(--accent-danger)' }}>*</span></label>
+              <input type="text" name="sekolahAsal" required className="input-field" placeholder="Nama sekolah" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: 'white' }} />
+            </div>
+            
+            <div className="input-group">
               <label className="input-label" style={{ color: '#8b9bb4' }}>Nomor HP <span style={{ color: 'var(--accent-danger)' }}>*</span></label>
               <input type="text" name="nomorHp" required className="input-field" placeholder="08..." style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: 'white' }} />
             </div>
@@ -181,10 +186,6 @@ export default function Register() {
             <div className="input-group">
               <label className="input-label" style={{ color: '#8b9bb4' }}>Berat Badan (kg) <span style={{ color: 'var(--accent-danger)' }}>*</span></label>
               <input type="number" name="beratBadan" required className="input-field" placeholder="Contoh: 60" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: 'white' }} />
-            </div>
-            <div className="input-group">
-              <label className="input-label" style={{ color: '#8b9bb4' }}>Sekolah Asal</label>
-              <input type="text" name="sekolahAsal" className="input-field" placeholder="Nama sekolah" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: 'white' }} />
             </div>
           </div>
 

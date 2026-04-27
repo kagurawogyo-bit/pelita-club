@@ -107,8 +107,8 @@ export default function AddMemberPage() {
               <input type="text" name="nik" className="input-field" placeholder="Masukkan 16 digit NIK" pattern="[0-9]{16}" title="Masukkan 16 digit NIK" />
             </div>
             <div className="input-group">
-              <label className="input-label">Sekolah Asal</label>
-              <input type="text" name="sekolahAsal" className="input-field" placeholder="Nama sekolah" />
+              <label className="input-label">Sekolah Asal <span style={{ color: 'var(--accent-danger)' }}>*</span></label>
+              <input type="text" name="sekolahAsal" required className="input-field" placeholder="Nama sekolah" />
             </div>
             <div className="input-group">
               <label className="input-label">Nomor WhatsApp</label>
