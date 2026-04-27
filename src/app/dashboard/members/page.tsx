@@ -4,7 +4,12 @@ import { verifyToken } from "@/lib/jwt";
 import { redirect } from "next/navigation";
 import StudentTable from "@/components/StudentTable";
 
-export default async function MembersPage() {
+export default async function MembersPage(props: {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchParams = await props.searchParams;
+  const genderQuery = searchParams?.gender as string | undefined;
+
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
 
@@ -76,16 +81,23 @@ export default async function MembersPage() {
   // Sort A-Z
   formattedStudents.sort((a, b) => a.namaLengkap.localeCompare(b.namaLengkap));
 
+  let finalStudents = formattedStudents;
+  if (genderQuery === "L") {
+    finalStudents = formattedStudents.filter(s => s.jk === "Laki-laki");
+  } else if (genderQuery === "P") {
+    finalStudents = formattedStudents.filter(s => s.jk === "Perempuan");
+  }
+
   return (
     <div className="animate-fade-in" style={{ maxWidth: '1400px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 700 }}>Data Siswa</h2>
+        <h2 style={{ fontSize: '2rem', fontWeight: 700 }}>Data Siswa {genderQuery === 'L' ? '(Laki-laki)' : genderQuery === 'P' ? '(Perempuan)' : ''}</h2>
         <a href="/dashboard/members/add" className="btn btn-primary" style={{ background: 'var(--accent-primary)', border: 'none', padding: '10px 20px', borderRadius: '8px' }}>
           + Tambah Siswa
         </a>
       </div>
 
-      <StudentTable students={formattedStudents} />
+      <StudentTable students={finalStudents} />
     </div>
   );
 }

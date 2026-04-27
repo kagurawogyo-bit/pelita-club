@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 const SectionLabel = ({ label }: { label: string }) => (
@@ -22,6 +22,7 @@ const NavItem = ({ href, icon, label, isActive, onClick }: { href: string, icon:
 
 export default function DashboardNav({ role, onNavClick }: { role: string, onNavClick?: () => void }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const isActive = (path: string) => pathname === path;
 
@@ -51,7 +52,15 @@ export default function DashboardNav({ role, onNavClick }: { role: string, onNav
             <>
               <SectionLabel label="MENU UTAMA" />
               <NavItem href="/dashboard" icon="🏠" label="Dashboard" isActive={isActive("/dashboard")} onClick={onNavClick} />
-              {role === "PENGURUS" && <NavItem href="/dashboard/members" icon="👥" label="Data Siswa" isActive={isActive("/dashboard/members")} onClick={onNavClick} />}
+              {role === "PENGURUS" && (
+                <>
+                  <NavItem href="/dashboard/members" icon="👥" label="Data Siswa" isActive={isActive("/dashboard/members") && !searchParams.get("gender")} onClick={onNavClick} />
+                  <div style={{ paddingLeft: '24px', opacity: 0.9 }}>
+                    <NavItem href="/dashboard/members?gender=L" icon="👦" label="Laki-laki" isActive={isActive("/dashboard/members") && searchParams.get("gender") === "L"} onClick={onNavClick} />
+                    <NavItem href="/dashboard/members?gender=P" icon="👧" label="Perempuan" isActive={isActive("/dashboard/members") && searchParams.get("gender") === "P"} onClick={onNavClick} />
+                  </div>
+                </>
+              )}
 
               <SectionLabel label="KEHADIRAN" />
               <NavItem href="/dashboard/attendance" icon="📋" label="Absen Siswa" isActive={isActive("/dashboard/attendance")} onClick={onNavClick} />
