@@ -36,17 +36,18 @@ export async function POST(req: Request) {
     }
 
     const userId = decoded.userId;
-    const { column, month, year } = session;
+    const { column, month, year, eventType = "REGULAR" } = session;
     const status = "✓"; // Default hadir jika scan QR sesi
 
     // Upsert ke GridAttendance
     await prisma.gridAttendance.upsert({
       where: {
-        userId_month_year_column: {
+        userId_month_year_column_eventType: {
           userId,
           column,
           month,
           year,
+          eventType,
         },
       },
       update: { status },
@@ -56,6 +57,7 @@ export async function POST(req: Request) {
         month,
         year,
         status,
+        eventType,
       },
     });
 
@@ -68,11 +70,12 @@ export async function POST(req: Request) {
         
         const alreadyPresent = await prisma.gridAttendance.findUnique({
           where: {
-            userId_month_year_column: {
+            userId_month_year_column_eventType: {
               userId: coachId,
               column,
               month,
               year,
+              eventType,
             }
           }
         });
@@ -80,11 +83,12 @@ export async function POST(req: Request) {
         if (alreadyPresent?.status !== "✓") {
           await prisma.gridAttendance.upsert({
             where: {
-              userId_month_year_column: {
+              userId_month_year_column_eventType: {
                 userId: coachId,
                 column,
                 month,
                 year,
+                eventType,
               },
             },
             update: { status: "✓" },
@@ -94,6 +98,7 @@ export async function POST(req: Request) {
               month,
               year,
               status: "✓",
+              eventType,
             },
           });
         }

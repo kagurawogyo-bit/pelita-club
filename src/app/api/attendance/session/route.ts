@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Hanya pengurus yang dapat membuat sesi" }, { status: 403 });
     }
 
-    const { column, month, year, coachIds } = await req.json();
+    const { column, month, year, coachIds, eventType = "REGULAR" } = await req.json();
 
     if (!column || month === undefined || year === undefined) {
       return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
@@ -45,7 +45,8 @@ export async function POST(req: Request) {
           month,
           year,
           expiresAt,
-          isActive: true
+          isActive: true,
+          eventType
         },
         include: {
           coach: {
@@ -72,6 +73,7 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const sessionId = searchParams.get("id");
+    const eventType = searchParams.get("eventType");
 
     if (sessionId) {
       const session = await prisma.attendanceSession.findUnique({
@@ -105,7 +107,8 @@ export async function GET(req: Request) {
       where: { 
         coachId: decoded.userId, 
         isActive: true,
-        expiresAt: { gt: new Date() }
+        expiresAt: { gt: new Date() },
+        ...(eventType ? { eventType } : {})
       },
       include: {
         coach: {
@@ -127,8 +130,15 @@ export async function DELETE(req: Request) {
         if (!token) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         const decoded: any /* eslint-disable-line @typescript-eslint/no-explicit-any */ = verifyToken(token);
         
+        const { searchParams } = new URL(req.url);
+        const eventType = searchParams.get("eventType");
+        
         await prisma.attendanceSession.updateMany({
-            where: { coachId: decoded.userId, isActive: true },
+            where: { 
+                coachId: decoded.userId, 
+                isActive: true,
+                ...(eventType ? { eventType } : {})
+            },
             data: { isActive: false }
         });
         

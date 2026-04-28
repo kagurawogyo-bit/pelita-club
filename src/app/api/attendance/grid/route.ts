@@ -20,11 +20,13 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const month = parseInt(searchParams.get("month") || "0");
     const year = parseInt(searchParams.get("year") || "0");
+    const eventType = searchParams.get("eventType") || "REGULAR";
 
     const attendances = await prisma.gridAttendance.findMany({
       where: {
         month,
-        year
+        year,
+        eventType
       }
     });
 
@@ -57,7 +59,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { userId, month, year, column, status, coachIds } = body;
+    const { userId, month, year, column, status, coachIds, eventType = "REGULAR" } = body;
 
     // Security check: only PENGURUS can update others. SISWA can only update themselves.
     if (decoded.role === "SISWA" && decoded.userId !== userId) {
@@ -67,15 +69,16 @@ export async function POST(req: Request) {
     // Upsert the main attendance record
     const attendance = await prisma.gridAttendance.upsert({
       where: {
-        userId_month_year_column: {
+        userId_month_year_column_eventType: {
           userId,
           month,
           year,
-          column
+          column,
+          eventType
         }
       },
       update: { status },
-      create: { userId, month, year, column, status }
+      create: { userId, month, year, column, status, eventType }
     });
 
     // If coachIds are provided and status is "✓", also update coach attendance
@@ -83,11 +86,12 @@ export async function POST(req: Request) {
       for (const coachId of coachIds) {
         await prisma.gridAttendance.upsert({
           where: {
-            userId_month_year_column: {
+            userId_month_year_column_eventType: {
               userId: coachId,
               month,
               year,
-              column
+              column,
+              eventType
             }
           },
           update: { status: "✓" },
@@ -96,7 +100,8 @@ export async function POST(req: Request) {
             month,
             year,
             column,
-            status: "✓"
+            status: "✓",
+            eventType
           }
         });
       }

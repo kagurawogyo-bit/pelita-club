@@ -37,6 +37,7 @@ model AttendanceSession {
   isActive    Boolean  @default(true)
   expiresAt   DateTime
   createdAt   DateTime @default(now())
+  eventType   String   @default("REGULAR") // "REGULAR", "CBB"
 }
 
 model Profile {
@@ -82,6 +83,7 @@ model GridAttendance {
   column    String   // "M1P1", etc.
   status    String   // "✓", "S", "I", "A", "-"
   updatedAt DateTime @updatedAt
+  eventType String   @default("REGULAR") // "REGULAR", "CBB"
 
-  @@unique([userId, month, year, column])
+  @@unique([userId, month, year, column, eventType])
 }

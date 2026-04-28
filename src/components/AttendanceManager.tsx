@@ -14,7 +14,9 @@ export default function AttendanceManager({
   title = "Absensi Siswa",
   showCoachSelection = false,
   coaches = [],
-  readOnly = false
+  readOnly = false,
+  eventType = "REGULAR",
+  customColumns
 }: { 
   initialStudents: any[], 
   customGroups?: string[] 
@@ -22,6 +24,8 @@ export default function AttendanceManager({
   showCoachSelection?: boolean
   coaches?: { id: string, namaLengkap: string }[]
   readOnly?: boolean
+  eventType?: string
+  customColumns?: string[]
 }) {
   const [selectedGroup, setSelectedGroup] = useState("Semua Kelompok");
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
@@ -36,7 +40,7 @@ export default function AttendanceManager({
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/attendance/grid?month=${selectedMonth}&year=${selectedYear}`);
+        const res = await fetch(`/api/attendance/grid?month=${selectedMonth}&year=${selectedYear}&eventType=${eventType}`);
         if (res.ok) {
           const data = await res.json();
           setAttendanceData(data);
@@ -68,7 +72,7 @@ export default function AttendanceManager({
     "17 tahun ke atas"
   ];
 
-  const columns = [
+  const columns = customColumns || [
     "M1P1", "M1P2", "M1P3", "M1P4", "M1P5", 
     "M2P1", "M2P2", "M2P3", "M2P4", "M2P5", 
     "M3P1", "M3P2", "M3P3", "M3P4", "M3P5", 
@@ -145,7 +149,8 @@ export default function AttendanceManager({
           year: selectedYear,
           column: col,
           status: nextStatus,
-          coachIds: title === "Absensi Siswa" ? selectedCoachIds : undefined
+          coachIds: title === "Absensi Siswa" ? selectedCoachIds : undefined,
+          eventType
         })
       });
     } catch (error) {
