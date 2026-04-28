@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -9,8 +9,29 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const [num1, setNum1] = useState(0);
+  const [num2, setNum2] = useState(0);
+  const [captchaAnswer, setCaptchaAnswer] = useState("");
+
+  useEffect(() => {
+    generateCaptcha();
+  }, []);
+
+  const generateCaptcha = () => {
+    setNum1(Math.floor(Math.random() * 10) + 1);
+    setNum2(Math.floor(Math.random() * 10) + 1);
+    setCaptchaAnswer("");
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (parseInt(captchaAnswer) !== num1 + num2) {
+      setError("Jawaban keamanan salah. Silakan coba lagi.");
+      generateCaptcha();
+      return;
+    }
+
     setLoading(true);
     setError("");
 
@@ -127,10 +148,24 @@ export default function Home() {
             </div>
           </div>
 
-          <div style={{ textAlign: 'right', marginBottom: '32px' }}>
+          <div style={{ textAlign: 'right', marginBottom: '24px' }}>
             <a href="/forgot-password" style={{ color: '#8b9bb4', fontSize: '0.85rem', fontWeight: 600, textDecoration: 'none' }}>
               Lupa password?
             </a>
+          </div>
+
+          <div className="input-group" style={{ marginBottom: '32px' }}>
+            <label className="input-label" style={{ color: '#8b9bb4' }}>
+              KEAMANAN: BERAPA HASIL {num1} + {num2}? <span style={{ color: '#ef4444' }}>*</span>
+            </label>
+            <input 
+              type="number" 
+              required 
+              value={captchaAnswer}
+              onChange={(e) => setCaptchaAnswer(e.target.value)}
+              placeholder="Masukkan jawaban"
+              className="input-field"
+            />
           </div>
 
           <button 
