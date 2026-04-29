@@ -278,7 +278,6 @@ export default function CbbQRScanPage() {
             </button>
           ) : (
             <div className="scanner-ui-overlay">
-              <div className="scanner-target-box"></div>
               <p className="scanner-instruction">Arahkan kamera ke QR Code Sesi CBB</p>
               <button
                 onClick={stopScanner}
@@ -288,7 +287,8 @@ export default function CbbQRScanPage() {
                   color: 'white', border: 'none', borderRadius: '12px',
                   fontWeight: 700, fontSize: '1rem', cursor: 'pointer',
                   position: 'absolute', bottom: '40px', left: '20px',
-                  zIndex: 101, boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+                  zIndex: 101, boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                  pointerEvents: 'auto'
                 }}
               >
                 Hentikan Kamera
@@ -355,51 +355,28 @@ export default function CbbQRScanPage() {
               pointer-events: auto;
             }
 
-            .scanner-target-box {
-              width: 260px;
-              height: 260px;
-              border: 3px solid var(--accent-primary);
-              border-radius: 28px;
-              box-shadow: 0 0 0 4000px rgba(0,0,0,0.6);
-              position: relative;
-              margin-top: -60px; /* Offset to center more visually */
-            }
-
-            .scanner-target-box::after {
-              content: '';
-              position: absolute;
-              top: 0; left: 0; right: 0; height: 3px;
-              background: var(--accent-primary);
-              box-shadow: 0 0 15px var(--accent-primary);
-              animation: scan-line 2.5s ease-in-out infinite;
-            }
-
-            @keyframes scan-line {
-              0% { top: 5%; opacity: 0; }
-              10% { opacity: 1; }
-              90% { opacity: 1; }
-              100% { top: 95%; opacity: 0; }
-            }
-
             .scanner-instruction {
               color: white;
-              margin-top: 40px;
+              position: absolute;
+              bottom: 120px;
               font-weight: 700;
               text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-              background: rgba(14, 165, 233, 0.2);
-              padding: 10px 24px;
+              background: rgba(15, 23, 42, 0.75);
+              padding: 12px 24px;
               border-radius: 24px;
               backdrop-filter: blur(8px);
               border: 1px solid rgba(255,255,255,0.1);
+              text-align: center;
+              width: fit-content;
             }
 
             .scanner-close-btn {
-              display: flex !important;
+              display: none !important; /* Hide on mobile since we have the red button */
             }
           }
 
           .scanner-close-btn {
-            display: none;
+            /* visible on desktop */
           }
 
           .scanner-ui-overlay {
