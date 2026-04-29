@@ -42,12 +42,12 @@ export async function PATCH(
 
   try {
     const decoded: any /* eslint-disable-line @typescript-eslint/no-explicit-any */ = verifyToken(token);
-    if (!decoded || decoded.role !== "PENGURUS") {
+    const { id } = await params;
+
+    if (!decoded || (decoded.role !== "PENGURUS" && decoded.userId !== id)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-
-    const { id } = await params;
     const data = await request.json();
 
     // Update profile
