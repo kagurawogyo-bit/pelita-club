@@ -237,7 +237,7 @@ export default function CbbCoachSessionPage() {
             Pertemuan {activeSession.column}
           </h3>
           <p style={{ color: 'var(--text-secondary)', marginBottom: '32px' }}>
-            {months[activeSession.month]} {activeSession.year} • Coach: {activeSession.coach?.profile?.namaLengkap}
+            {months[activeSession.month]} {activeSession.year}
           </p>
 
           <div className="qr-wrapper-responsive">
