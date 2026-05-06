@@ -34,6 +34,14 @@ export default function AttendanceManager({
   const [loading, setLoading] = useState(false);
 
   const [attendanceData, setAttendanceData] = useState<Record<string, Record<string, string>>>({});
+  const [searchQuery, setSearchQuery] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState<number | "all">(100);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedGroup, itemsPerPage]);
 
   // Load from API
   useEffect(() => {
@@ -159,11 +167,21 @@ export default function AttendanceManager({
   };
 
 
-  // Filter students by group (if the data has it)
-  const filteredStudents = initialStudents.filter(s => {
-    if (selectedGroup === "Semua Kelompok") return true;
-    return s.kelompokUmur === selectedGroup;
+  // Filter and paginate students
+  let processedStudents = initialStudents.filter(s => {
+    const studentName = (s.profile?.namaLengkap || s.namaLengkap || "").toLowerCase();
+    const matchesSearch = studentName.includes(searchQuery.toLowerCase());
+    const matchesGroup = selectedGroup === "Semua Kelompok" || s.kelompokUmur === selectedGroup;
+    return matchesSearch && matchesGroup;
   });
+
+  const totalItems = processedStudents.length;
+  const totalPages = itemsPerPage === "all" ? 1 : Math.ceil(totalItems / itemsPerPage) || 1;
+
+  if (itemsPerPage !== "all") {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    processedStudents = processedStudents.slice(startIndex, startIndex + itemsPerPage);
+  }
 
   return (
     <div className="animate-fade-in" style={{ maxWidth: '1400px', margin: '0 auto', opacity: loading ? 0.7 : 1 }}>
@@ -261,6 +279,28 @@ export default function AttendanceManager({
           >
             {years.map(y => <option key={y} value={y}>{y}</option>)}
           </select>
+
+          <input 
+            type="text" 
+            placeholder="Cari nama..." 
+            className="input-field" 
+            style={{ width: '200px' }}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+
+          <select 
+            className="input-field" 
+            style={{ width: '120px', cursor: 'pointer' }}
+            value={itemsPerPage}
+            onChange={(e) => setItemsPerPage(e.target.value === "all" ? "all" : parseInt(e.target.value))}
+          >
+            <option value={5}>5 Baris</option>
+            <option value={10}>10 Baris</option>
+            <option value={25}>25 Baris</option>
+            <option value={100}>100 Baris</option>
+            <option value="all">Semua</option>
+          </select>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: 'auto', background: 'var(--bg-secondary)', padding: '8px 16px', borderRadius: '12px', border: '1px solid var(--border-glass)' }}>
@@ -290,17 +330,19 @@ export default function AttendanceManager({
               </tr>
             </thead>
             <tbody>
-              {filteredStudents.length === 0 ? (
+              {processedStudents.length === 0 ? (
                 <tr>
                   <td colSpan={columns.length + 2} style={{ padding: '48px', color: 'var(--text-secondary)', fontSize: '1rem' }}>
-                    {title === "Absensi Pelatih" ? "Tidak ada data pelatih ditemukan." : "Tidak ada data siswa untuk kelompok ini."}
+                    {title === "Absensi Pelatih" ? "Tidak ada data pelatih ditemukan." : "Tidak ada data siswa ditemukan."}
                   </td>
                 </tr>
 
               ) : (
-                filteredStudents.map((student: any /* eslint-disable-line @typescript-eslint/no-explicit-any */, index: number) => (
+                processedStudents.map((student: any /* eslint-disable-line @typescript-eslint/no-explicit-any */, index: number) => {
+                  const actualIndex = itemsPerPage === "all" ? index + 1 : (currentPage - 1) * (itemsPerPage as number) + index + 1;
+                  return (
                   <tr key={student.id} style={{ borderBottom: '1px solid var(--border-glass)', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.02)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
-                    <td style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem' }}>{index + 1}</td>
+                    <td style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem' }}>{actualIndex}</td>
                     <td style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem' }}>{student.profile?.namaLengkap || student.namaLengkap}</td>
                     {columns.map((col) => {
                       const status = (attendanceData[student.id] && attendanceData[student.id][col]) || "-";
@@ -345,11 +387,41 @@ export default function AttendanceManager({
                       );
                     })}
                   </tr>
-                ))
+                )})
               )}
             </tbody>
           </table>
         </div>
+        
+        {/* Pagination Controls */}
+        {itemsPerPage !== "all" && totalPages > 1 && (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px', borderTop: '1px solid var(--border-glass)' }}>
+            <span style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
+              Menampilkan {Math.min((currentPage - 1) * (itemsPerPage as number) + 1, totalItems)} - {Math.min(currentPage * (itemsPerPage as number), totalItems)} dari {totalItems} data
+            </span>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button 
+                className="btn" 
+                style={{ padding: '8px 16px', background: 'var(--bg-primary)', border: '1px solid var(--border-glass)', opacity: currentPage === 1 ? 0.5 : 1, cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }}
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+              >
+                Sebelumnya
+              </button>
+              <span style={{ padding: '8px 16px', background: 'var(--bg-primary)', border: '1px solid var(--border-glass)', borderRadius: 'var(--radius-md)' }}>
+                {currentPage} / {totalPages}
+              </span>
+              <button 
+                className="btn" 
+                style={{ padding: '8px 16px', background: 'var(--bg-primary)', border: '1px solid var(--border-glass)', opacity: currentPage === totalPages ? 0.5 : 1, cursor: currentPage === totalPages ? 'not-allowed' : 'pointer' }}
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+              >
+                Selanjutnya
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
