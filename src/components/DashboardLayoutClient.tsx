@@ -16,8 +16,9 @@ export default function DashboardLayoutClient({
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
-    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: 'var(--bg-primary)' }}>
-      
+    <div className="dashboard-theme-container" style={{ display: 'flex', height: '100vh', overflow: 'hidden', position: 'relative' }}>
+      <div className="dashboard-bg"></div>
+
       {/* Overlay for mobile */}
       <div 
         className={`sidebar-overlay ${isSidebarOpen ? 'active' : ''}`}
