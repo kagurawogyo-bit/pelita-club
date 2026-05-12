@@ -15,20 +15,18 @@ export default async function CbbPelatihAttendancePage() {
     redirect("/dashboard");
   }
 
-  // Fetch real coaches (PENGURUS)
-  const coachesRaw = await prisma.user.findMany({
+  // Fetch users with role PENGURUS
+  const users = await prisma.user.findMany({
     where: { role: "PENGURUS" },
     include: { profile: true },
     orderBy: { profile: { namaLengkap: 'asc' } }
   });
 
-  const coaches = coachesRaw
-    .filter(c => c.profile?.namaLengkap?.startsWith("Coach")) 
-    .map(c => ({
-      id: c.id,
-      namaLengkap: c.profile?.namaLengkap || "Pelatih",
-      kelompokUmur: "Pelatih"
-    }));
+  const coaches = users.map(u => ({
+    id: u.id,
+    namaLengkap: u.profile?.namaLengkap || u.email || "Pelatih",
+    kelompokUmur: "Pelatih"
+  }));
 
   const cbbColumns = [
     "CBB-1", "CBB-2", "CBB-3", "CBB-4", "CBB-5", 
