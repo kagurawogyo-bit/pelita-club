@@ -55,6 +55,32 @@ export async function POST(req: Request) {
         }
       });
 
+      // Sinkronisasi otomatis: Tandai pelatih hadir saat sesi dibuat
+      const coachIdsList = Array.isArray(coachIds) ? coachIds : [decoded.userId];
+      for (const cid of coachIdsList) {
+        if (!cid) continue;
+        await prisma.gridAttendance.upsert({
+          where: {
+            userId_month_year_column_eventType: {
+              userId: cid,
+              column,
+              month,
+              year,
+              eventType,
+            },
+          },
+          update: { status: "✓" },
+          create: {
+            userId: cid,
+            column,
+            month,
+            year,
+            status: "✓",
+            eventType,
+          },
+        });
+      }
+
       return NextResponse.json(session);
     } catch (createErr: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
       console.error("Error creating session in DB:", createErr);
