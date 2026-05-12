@@ -32,7 +32,9 @@ export default async function CbbPelatihAttendancePage() {
 
   const cbbColumns = [
     "CBB-1", "CBB-2", "CBB-3", "CBB-4", "CBB-5", 
-    "CBB-6", "CBB-7", "CBB-8", "CBB-9", "CBB-10"
+    "CBB-6", "CBB-7", "CBB-8", "CBB-9", "CBB-10",
+    "CBB-11", "CBB-12", "CBB-13", "CBB-14", "CBB-15",
+    "CBB-16", "CBB-17", "CBB-18", "CBB-19", "CBB-20"
   ];
 
   return (
