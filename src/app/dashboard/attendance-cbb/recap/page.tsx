@@ -90,7 +90,7 @@ export default async function CbbRecapPage() {
                 recapArray.map((row, index) => {
                   const total = row.hadir + row.sakit + row.izin + row.alpa;
                   return (
-                    <tr key={index} style={{ borderBottom: '1px solid var(--border-glass)', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.02)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
+                    <tr key={index} style={{ borderBottom: '1px solid var(--border-glass)', transition: 'background 0.2s' }}>
                       <td style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem' }}>{index + 1}</td>
                       <td style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem' }}>{row.nama}</td>
                       <td style={{ padding: '16px', textAlign: 'left' }}>
