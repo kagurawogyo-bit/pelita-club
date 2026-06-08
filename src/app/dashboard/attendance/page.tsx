@@ -61,6 +61,7 @@ export default async function AttendancePage() {
     return {
       id: u.id,
       namaLengkap: u.profile?.namaLengkap?.toLowerCase() || "tanpa nama",
+      namaPanggilan: u.profile?.namaPanggilan?.toLowerCase() || "",
       kelompokUmur,
     };
   });

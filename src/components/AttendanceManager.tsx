@@ -170,7 +170,8 @@ export default function AttendanceManager({
   // Filter and paginate students
   let processedStudents = initialStudents.filter(s => {
     const studentName = (s.profile?.namaLengkap || s.namaLengkap || "").toLowerCase();
-    const matchesSearch = studentName.includes(searchQuery.toLowerCase());
+    const nickname = (s.profile?.namaPanggilan || s.namaPanggilan || "").toLowerCase();
+    const matchesSearch = studentName.includes(searchQuery.toLowerCase()) || nickname.includes(searchQuery.toLowerCase());
     const matchesGroup = selectedGroup === "Semua Kelompok" || s.kelompokUmur === selectedGroup;
     return matchesSearch && matchesGroup;
   });
@@ -343,7 +344,14 @@ export default function AttendanceManager({
                   return (
                   <tr key={student.id} style={{ borderBottom: '1px solid var(--border-glass)', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.02)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
                     <td style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem' }}>{actualIndex}</td>
-                    <td style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem' }}>{student.profile?.namaLengkap || student.namaLengkap}</td>
+                    <td style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                      {student.profile?.namaLengkap || student.namaLengkap}
+                      {(student.profile?.namaPanggilan || student.namaPanggilan) ? (
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px', fontWeight: 500 }}>
+                          ({student.profile?.namaPanggilan || student.namaPanggilan})
+                        </div>
+                      ) : null}
+                    </td>
                     {columns.map((col) => {
                       const status = (attendanceData[student.id] && attendanceData[student.id][col]) || "-";
                       const style = statusStyles[status];

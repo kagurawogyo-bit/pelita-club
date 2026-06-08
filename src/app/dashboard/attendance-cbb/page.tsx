@@ -47,6 +47,7 @@ export default async function CbbAttendancePage() {
     return {
       id: u.id,
       namaLengkap: u.profile?.namaLengkap?.toLowerCase() || "tanpa nama",
+      namaPanggilan: u.profile?.namaPanggilan?.toLowerCase() || "",
       kelompokUmur,
     };
   });
