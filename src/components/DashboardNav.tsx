@@ -73,17 +73,6 @@ export default function DashboardNav({ role, onNavClick }: { role: string, onNav
                 </>
               )}
 
-              <SectionLabel label="EVENT CBB" />
-              <NavItem href="/dashboard/attendance-cbb" icon="🏀" label="Absen Siswa CBB" isActive={isActive("/dashboard/attendance-cbb")} onClick={onNavClick} />
-              <NavItem href="/dashboard/attendance-cbb/scan" icon="📷" label="Scan QR CBB" isActive={isActive("/dashboard/attendance-cbb/scan")} onClick={onNavClick} />
-              {role === "PENGURUS" && (
-                <>
-                  <NavItem href="/dashboard/attendance-cbb/session" icon="🎫" label="Sesi QR CBB" isActive={isActive("/dashboard/attendance-cbb/session")} onClick={onNavClick} />
-                  <NavItem href="/dashboard/attendance-cbb/pelatih" icon="📋" label="Absen Pelatih CBB" isActive={isActive("/dashboard/attendance-cbb/pelatih")} onClick={onNavClick} />
-                  <NavItem href="/dashboard/attendance-cbb/recap" icon="📊" label="Rekap Absensi CBB" isActive={isActive("/dashboard/attendance-cbb/recap")} onClick={onNavClick} />
-                </>
-              )}
-
               <SectionLabel label="BIODATA" />
               <NavItem href="/dashboard/profile" icon="👤" label="Profil Saya" isActive={isActive("/dashboard/profile")} onClick={onNavClick} />
               {role === "PENGURUS" && (
