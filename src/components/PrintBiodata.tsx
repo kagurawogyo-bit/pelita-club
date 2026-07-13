@@ -15,28 +15,48 @@ function InfoField({ label, value }: { label: string; value?: string | null }) {
   );
 }
 
-function DocBadge({ label, url }: { label: string; url: string }) {
+function DocBadge({ label, url, filename }: { label: string; url: string; filename: string }) {
+  const downloadUrl = `/api/download?url=${encodeURIComponent(url)}&name=${encodeURIComponent(filename)}`;
+
   return (
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: '8px',
-        padding: '10px 16px',
-        background: '#f0f7ff',
-        border: '1px solid #3b82f6',
-        borderRadius: '8px',
-        color: '#1d4ed8',
-        textDecoration: 'none',
-        fontSize: '0.9rem',
-        fontWeight: 600,
-      }}
-    >
-      📄 {label}
-    </a>
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0', border: '1px solid #3b82f6', borderRadius: '8px', overflow: 'hidden' }}>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '8px',
+          padding: '10px 16px',
+          background: '#f0f7ff',
+          color: '#1d4ed8',
+          textDecoration: 'none',
+          fontSize: '0.9rem',
+          fontWeight: 600,
+          borderRight: '1px solid #93c5fd',
+        }}
+      >
+        📄 {label}
+      </a>
+      <a
+        href={downloadUrl}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '6px',
+          padding: '10px 14px',
+          background: '#dbeafe',
+          color: '#1d4ed8',
+          textDecoration: 'none',
+          fontSize: '0.82rem',
+          fontWeight: 700,
+        }}
+        title={`Unduh ${label}`}
+      >
+        ⬇️ Unduh
+      </a>
+    </div>
   );
 }
 
@@ -163,9 +183,9 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
               Dokumen Pendukung
             </div>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              {p?.dokumenKK && <DocBadge label="Kartu Keluarga (KK)" url={p.dokumenKK} />}
-              {p?.dokumenAkte && <DocBadge label="Akte Kelahiran" url={p.dokumenAkte} />}
-              {p?.dokumenKtp && <DocBadge label="KTP / Kartu Pelajar" url={p.dokumenKtp} />}
+              {p?.dokumenKK && <DocBadge label="Kartu Keluarga (KK)" url={p.dokumenKK} filename={`KK_${p?.namaLengkap || 'siswa'}.pdf`} />}
+              {p?.dokumenAkte && <DocBadge label="Akte Kelahiran" url={p.dokumenAkte} filename={`Akte_${p?.namaLengkap || 'siswa'}.pdf`} />}
+              {p?.dokumenKtp && <DocBadge label="KTP / Kartu Pelajar" url={p.dokumenKtp} filename={`KTP_${p?.namaLengkap || 'siswa'}.pdf`} />}
             </div>
             <p style={{ fontSize: '0.78rem', color: '#666', marginTop: '10px' }}>
               * Klik tombol dokumen untuk membuka / mengunduh file aslinya.
