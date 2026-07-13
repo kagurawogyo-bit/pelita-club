@@ -28,7 +28,19 @@ export default function UserActions({ userId, userName, editUrl }: { userId: str
   };
 
   return (
-    <div style={{ display: 'flex', gap: '12px' }}>
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <Link 
+        href={`/dashboard/members/${userId}`} 
+        style={{ 
+          color: '#16a34a', 
+          textDecoration: 'none', 
+          fontSize: '0.9rem',
+          cursor: 'pointer',
+          fontWeight: 600,
+        }}
+      >
+        Detail
+      </Link>
       <Link 
         href={editUrl} 
         style={{ 

@@ -1,0 +1,226 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
+function InfoField({ label, value }: { label: string; value?: string | null }) {
+  return (
+    <div style={{ marginBottom: '12px' }}>
+      <div style={{ fontSize: '0.78rem', color: '#666', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '2px' }}>
+        {label}
+      </div>
+      <div style={{ fontSize: '0.95rem', color: '#111', borderBottom: '1px solid #ddd', paddingBottom: '6px' }}>
+        {value || '-'}
+      </div>
+    </div>
+  );
+}
+
+function DocBadge({ label, url }: { label: string; url: string }) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '10px 16px',
+        background: '#f0f7ff',
+        border: '1px solid #3b82f6',
+        borderRadius: '8px',
+        color: '#1d4ed8',
+        textDecoration: 'none',
+        fontSize: '0.9rem',
+        fontWeight: 600,
+      }}
+    >
+      📄 {label}
+    </a>
+  );
+}
+
+export default function PrintBiodata({ user }: { user: any /* eslint-disable-line @typescript-eslint/no-explicit-any */ }) {
+  const router = useRouter();
+  const p = user.profile;
+
+  const formatDate = (d?: Date | null) =>
+    d ? new Date(d).toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" }) : "-";
+
+  const currentYear = new Date().getFullYear();
+  let umur = "-";
+  if (p?.tanggalLahir) {
+    umur = `${currentYear - new Date(p.tanggalLahir).getFullYear()} tahun`;
+  }
+
+  const jenisKelamin = p?.jenisKelamin === "LAKI_LAKI" ? "Laki-laki" : p?.jenisKelamin === "PEREMPUAN" ? "Perempuan" : "-";
+
+  const hasDokumen = p?.dokumenKK || p?.dokumenAkte || p?.dokumenKtp;
+
+  return (
+    <div className="animate-fade-in">
+      {/* Action Bar - Hidden on print */}
+      <div className="no-print" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+        <button onClick={() => router.back()} className="btn btn-outline" style={{ padding: '8px 12px' }}>
+          ← Kembali
+        </button>
+        <h2 style={{ fontSize: '1.8rem', fontWeight: 700, flex: 1 }}>Biodata Siswa</h2>
+        <button
+          onClick={() => window.print()}
+          className="btn btn-primary"
+          style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px' }}
+        >
+          🖨️ Cetak Biodata
+        </button>
+        <a
+          href={`/dashboard/members/edit/${user.id}`}
+          className="btn btn-outline"
+          style={{ padding: '10px 20px' }}
+        >
+          ✏️ Edit Data
+        </a>
+      </div>
+
+      {/* Print-ready card */}
+      <div
+        id="print-area"
+        style={{
+          background: 'white',
+          color: '#111',
+          borderRadius: '12px',
+          padding: '40px',
+          boxShadow: '0 2px 20px rgba(0,0,0,0.08)',
+          maxWidth: '900px',
+          margin: '0 auto',
+          fontFamily: "'Inter', sans-serif",
+        }}
+      >
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', borderBottom: '2px solid #2563eb', paddingBottom: '20px', marginBottom: '32px' }}>
+          <div style={{ width: '64px', height: '64px', background: '#f1f5f9', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '8px', flexShrink: 0 }}>
+            <img src="/images/logo.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </div>
+          <div>
+            <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#1e3a8a', letterSpacing: '-0.02em' }}>DATA PELITA BONDOWOSO</div>
+            <div style={{ fontSize: '0.9rem', color: '#2563eb', marginTop: '2px' }}>Formulir Biodata Anggota</div>
+          </div>
+          <div style={{ marginLeft: 'auto', textAlign: 'right', fontSize: '0.8rem', color: '#666' }}>
+            <div>Dicetak pada</div>
+            <div style={{ fontWeight: 600 }}>{new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })}</div>
+          </div>
+        </div>
+
+        {/* Name badge */}
+        <div style={{ background: 'linear-gradient(135deg, #1e3a8a, #2563eb)', color: 'white', borderRadius: '10px', padding: '20px 28px', marginBottom: '32px' }}>
+          <div style={{ fontSize: '1.6rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em' }}>
+            {p?.namaLengkap || '-'}
+          </div>
+          <div style={{ fontSize: '1rem', opacity: 0.85, marginTop: '4px' }}>
+            {p?.namaPanggilan ? `"${p.namaPanggilan}"` : ''} · {jenisKelamin} · {umur}
+          </div>
+        </div>
+
+        {/* Data grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 40px' }}>
+          {/* Left column */}
+          <div>
+            <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#2563eb', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px', borderBottom: '2px solid #e2e8f0', paddingBottom: '8px' }}>
+              Data Pribadi
+            </div>
+            <InfoField label="Nama Lengkap" value={p?.namaLengkap?.toUpperCase()} />
+            <InfoField label="Nama Panggilan" value={p?.namaPanggilan} />
+            <InfoField label="Tempat Lahir" value={p?.tempatLahir} />
+            <InfoField label="Tanggal Lahir" value={formatDate(p?.tanggalLahir)} />
+            <InfoField label="Jenis Kelamin" value={jenisKelamin} />
+            <InfoField label="Agama" value={p?.agama} />
+            <InfoField label="NIK" value={p?.nik} />
+            <InfoField label="Nomor HP" value={p?.nomorHp} />
+          </div>
+
+          {/* Right column */}
+          <div>
+            <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#2563eb', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px', borderBottom: '2px solid #e2e8f0', paddingBottom: '8px' }}>
+              Data Tambahan
+            </div>
+            <InfoField label="Tinggi Badan" value={p?.tinggiBadan ? `${p.tinggiBadan} cm` : undefined} />
+            <InfoField label="Berat Badan" value={p?.beratBadan ? `${p.beratBadan} kg` : undefined} />
+            <InfoField label="Asal Sekolah" value={p?.sekolahAsal} />
+            <InfoField label="Nama Ayah" value={p?.namaAyah} />
+            <InfoField label="Nama Ibu" value={p?.namaIbu} />
+            <InfoField label="Email Akun" value={user.email} />
+          </div>
+        </div>
+
+        {/* Alamat */}
+        <div style={{ marginTop: '20px' }}>
+          <InfoField label="Alamat Lengkap" value={p?.alamat} />
+        </div>
+
+        {/* Dokumen Pendukung */}
+        {hasDokumen && (
+          <div style={{ marginTop: '28px', borderTop: '2px solid #e2e8f0', paddingTop: '24px' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#2563eb', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
+              Dokumen Pendukung
+            </div>
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              {p?.dokumenKK && <DocBadge label="Kartu Keluarga (KK)" url={p.dokumenKK} />}
+              {p?.dokumenAkte && <DocBadge label="Akte Kelahiran" url={p.dokumenAkte} />}
+              {p?.dokumenKtp && <DocBadge label="KTP / Kartu Pelajar" url={p.dokumenKtp} />}
+            </div>
+            <p style={{ fontSize: '0.78rem', color: '#666', marginTop: '10px' }}>
+              * Klik tombol dokumen untuk membuka / mengunduh file aslinya.
+            </p>
+          </div>
+        )}
+
+        {/* Status dokumen jika belum ada */}
+        {!hasDokumen && (
+          <div style={{ marginTop: '28px', borderTop: '2px solid #e2e8f0', paddingTop: '20px' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#2563eb', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>
+              Dokumen Pendukung
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px' }}>
+              {[
+                { label: 'Kartu Keluarga (KK)', value: p?.dokumenKK },
+                { label: 'Akte Kelahiran', value: p?.dokumenAkte },
+                { label: 'KTP / Kartu Pelajar', value: p?.dokumenKtp },
+              ].map(doc => (
+                <div key={doc.label} style={{ border: '1px dashed #cbd5e1', borderRadius: '8px', padding: '12px', textAlign: 'center' }}>
+                  <div style={{ fontSize: '1.5rem', marginBottom: '4px' }}>📋</div>
+                  <div style={{ fontSize: '0.82rem', color: '#64748b', fontWeight: 600 }}>{doc.label}</div>
+                  <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '2px' }}>Belum diunggah</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Footer */}
+        <div style={{ marginTop: '48px', borderTop: '1px solid #e2e8f0', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontSize: '0.82rem', color: '#666' }}>
+          <div>
+            <div>Data Pelita Bondowoso</div>
+            <div style={{ marginTop: '2px' }}>Sistem Manajemen Anggota</div>
+          </div>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ marginBottom: '48px' }}>Tanda Tangan Pengurus,</div>
+            <div style={{ borderTop: '1px solid #111', paddingTop: '4px', minWidth: '160px' }}>(...........................)</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Print CSS */}
+      <style>{`
+        @media print {
+          .no-print { display: none !important; }
+          body { background: white !important; }
+          #print-area {
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            padding: 20px !important;
+            max-width: 100% !important;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
