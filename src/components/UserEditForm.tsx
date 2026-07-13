@@ -7,6 +7,30 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [dokKK, setDokKK] = useState<string | null>(user.profile?.dokumenKK || null);
+  const [dokAkte, setDokAkte] = useState<string | null>(user.profile?.dokumenAkte || null);
+  const [dokKtp, setDokKtp] = useState<string | null>(user.profile?.dokumenKtp || null);
+  const [deletingDoc, setDeletingDoc] = useState<string | null>(null);
+
+  const handleDeleteDoc = async (field: 'dokumenKK' | 'dokumenAkte' | 'dokumenKtp', label: string) => {
+    if (!confirm(`Apakah Anda yakin ingin menghapus dokumen ${label}?`)) return;
+    setDeletingDoc(field);
+    try {
+      const res = await fetch(`/api/users/${user.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ [field]: null }),
+      });
+      if (!res.ok) throw new Error('Gagal menghapus dokumen');
+      if (field === 'dokumenKK') setDokKK(null);
+      if (field === 'dokumenAkte') setDokAkte(null);
+      if (field === 'dokumenKtp') setDokKtp(null);
+    } catch (err: any /* eslint-disable-line @typescript-eslint/no-explicit-any */) {
+      alert(err.message);
+    } finally {
+      setDeletingDoc(null);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -177,20 +201,55 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>Format file: PDF, JPG, PNG. Maksimal 2MB.</p>
               
               <div className="grid-cols-2">
+                {/* KK */}
                 <div className="input-group">
                   <label className="input-label">Kartu Keluarga (KK)</label>
+                  {dokKK ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', background: 'rgba(22,163,74,0.08)', border: '1px solid rgba(22,163,74,0.3)', borderRadius: '8px', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 600, flex: 1 }}>✓ Dokumen KK tersimpan</span>
+                      <a href={dokKK} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>Lihat</a>
+                      <button type="button" onClick={() => handleDeleteDoc('dokumenKK', 'KK')} disabled={deletingDoc === 'dokumenKK'} style={{ fontSize: '0.8rem', color: 'var(--accent-danger)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, padding: 0 }}>
+                        {deletingDoc === 'dokumenKK' ? '...' : 'Hapus'}
+                      </button>
+                    </div>
+                  ) : (
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Belum ada dokumen</p>
+                  )}
                   <input type="file" name="fileKK" accept=".pdf,image/jpeg,image/png,image/jpg" className="input-field" style={{ padding: '8px', cursor: 'pointer' }} />
-                  {user.profile?.dokumenKK && <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', marginTop: '4px' }}>✓ Sudah ada dokumen KK tersimpan</p>}
                 </div>
+
+                {/* Akte */}
                 <div className="input-group">
                   <label className="input-label">Akte Kelahiran</label>
+                  {dokAkte ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', background: 'rgba(22,163,74,0.08)', border: '1px solid rgba(22,163,74,0.3)', borderRadius: '8px', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 600, flex: 1 }}>✓ Dokumen Akte tersimpan</span>
+                      <a href={dokAkte} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>Lihat</a>
+                      <button type="button" onClick={() => handleDeleteDoc('dokumenAkte', 'Akte')} disabled={deletingDoc === 'dokumenAkte'} style={{ fontSize: '0.8rem', color: 'var(--accent-danger)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, padding: 0 }}>
+                        {deletingDoc === 'dokumenAkte' ? '...' : 'Hapus'}
+                      </button>
+                    </div>
+                  ) : (
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Belum ada dokumen</p>
+                  )}
                   <input type="file" name="fileAkte" accept=".pdf,image/jpeg,image/png,image/jpg" className="input-field" style={{ padding: '8px', cursor: 'pointer' }} />
-                  {user.profile?.dokumenAkte && <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', marginTop: '4px' }}>✓ Sudah ada dokumen Akte tersimpan</p>}
                 </div>
+
+                {/* KTP */}
                 <div className="input-group">
                   <label className="input-label">KTP / Kartu Pelajar</label>
+                  {dokKtp ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', background: 'rgba(22,163,74,0.08)', border: '1px solid rgba(22,163,74,0.3)', borderRadius: '8px', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 600, flex: 1 }}>✓ Dokumen KTP tersimpan</span>
+                      <a href={dokKtp} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 600 }}>Lihat</a>
+                      <button type="button" onClick={() => handleDeleteDoc('dokumenKtp', 'KTP/Kartu Pelajar')} disabled={deletingDoc === 'dokumenKtp'} style={{ fontSize: '0.8rem', color: 'var(--accent-danger)', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, padding: 0 }}>
+                        {deletingDoc === 'dokumenKtp' ? '...' : 'Hapus'}
+                      </button>
+                    </div>
+                  ) : (
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '6px' }}>Belum ada dokumen</p>
+                  )}
                   <input type="file" name="fileKtp" accept=".pdf,image/jpeg,image/png,image/jpg" className="input-field" style={{ padding: '8px', cursor: 'pointer' }} />
-                  {user.profile?.dokumenKtp && <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', marginTop: '4px' }}>✓ Sudah ada dokumen KTP tersimpan</p>}
                 </div>
               </div>
             </>
