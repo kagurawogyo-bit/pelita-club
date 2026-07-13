@@ -183,9 +183,9 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
               Dokumen Pendukung
             </div>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              {p?.dokumenKK && <DocBadge label="Kartu Keluarga (KK)" url={p.dokumenKK} filename={`KK_${p?.namaLengkap || 'siswa'}.pdf`} />}
-              {p?.dokumenAkte && <DocBadge label="Akte Kelahiran" url={p.dokumenAkte} filename={`Akte_${p?.namaLengkap || 'siswa'}.pdf`} />}
-              {p?.dokumenKtp && <DocBadge label="KTP / Kartu Pelajar" url={p.dokumenKtp} filename={`KTP_${p?.namaLengkap || 'siswa'}.pdf`} />}
+              {p?.dokumenKK && <DocBadge label="Kartu Keluarga (KK)" url={p.dokumenKK} filename={`KK_${p?.namaLengkap || 'siswa'}.${p.dokumenKK.split('.').pop()?.split('?')[0] || 'jpg'}`} />}
+              {p?.dokumenAkte && <DocBadge label="Akte Kelahiran" url={p.dokumenAkte} filename={`Akte_${p?.namaLengkap || 'siswa'}.${p.dokumenAkte.split('.').pop()?.split('?')[0] || 'jpg'}`} />}
+              {p?.dokumenKtp && <DocBadge label="KTP / Kartu Pelajar" url={p.dokumenKtp} filename={`KTP_${p?.namaLengkap || 'siswa'}.${p.dokumenKtp.split('.').pop()?.split('?')[0] || 'jpg'}`} />}
             </div>
             <p style={{ fontSize: '0.78rem', color: '#666', marginTop: '10px' }}>
               * Klik tombol dokumen untuk membuka / mengunduh file aslinya.
