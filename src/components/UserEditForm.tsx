@@ -17,6 +17,40 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
     const data = Object.fromEntries(formData.entries());
 
     try {
+      // Handle file uploads
+      const uploadFile = async (fileKey: string, type: string) => {
+        const file = formData.get(fileKey) as File;
+        if (file && file.size > 0) {
+          const uploadData = new FormData();
+          uploadData.append('file', file);
+          uploadData.append('type', type);
+          
+          const uploadRes = await fetch('/api/upload', {
+            method: 'POST',
+            body: uploadData,
+          });
+          
+          const uploadResult = await uploadRes.json();
+          if (!uploadRes.ok) throw new Error(uploadResult.error || `Gagal upload ${type}`);
+          return uploadResult.url;
+        }
+        return undefined;
+      };
+
+      const dokumenKKUrl = await uploadFile('fileKK', 'KK');
+      if (dokumenKKUrl) data.dokumenKK = dokumenKKUrl;
+      
+      const dokumenAkteUrl = await uploadFile('fileAkte', 'Akte');
+      if (dokumenAkteUrl) data.dokumenAkte = dokumenAkteUrl;
+      
+      const dokumenKtpUrl = await uploadFile('fileKtp', 'Ktp');
+      if (dokumenKtpUrl) data.dokumenKtp = dokumenKtpUrl;
+
+      // Clean up file inputs from JSON data
+      delete data.fileKK;
+      delete data.fileAkte;
+      delete data.fileKtp;
+
       const res = await fetch(`/api/users/${user.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -136,6 +170,27 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
                 <div className="input-group">
                   <label className="input-label">Nama Ibu (Opsional)</label>
                   <input type="text" name="namaIbu" defaultValue={user.profile?.namaIbu || ""} className="input-field" />
+                </div>
+              </div>
+              
+              <h3 style={{ margin: '24px 0 16px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '8px', fontSize: '1.1rem' }}>Dokumen Pendukung (Opsional)</h3>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '16px' }}>Format file: PDF, JPG, PNG. Maksimal 2MB.</p>
+              
+              <div className="grid-cols-2">
+                <div className="input-group">
+                  <label className="input-label">Kartu Keluarga (KK)</label>
+                  <input type="file" name="fileKK" accept=".pdf,image/jpeg,image/png,image/jpg" className="input-field" style={{ padding: '8px', cursor: 'pointer' }} />
+                  {user.profile?.dokumenKK && <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', marginTop: '4px' }}>✓ Sudah ada dokumen KK tersimpan</p>}
+                </div>
+                <div className="input-group">
+                  <label className="input-label">Akte Kelahiran</label>
+                  <input type="file" name="fileAkte" accept=".pdf,image/jpeg,image/png,image/jpg" className="input-field" style={{ padding: '8px', cursor: 'pointer' }} />
+                  {user.profile?.dokumenAkte && <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', marginTop: '4px' }}>✓ Sudah ada dokumen Akte tersimpan</p>}
+                </div>
+                <div className="input-group">
+                  <label className="input-label">KTP / Kartu Pelajar</label>
+                  <input type="file" name="fileKtp" accept=".pdf,image/jpeg,image/png,image/jpg" className="input-field" style={{ padding: '8px', cursor: 'pointer' }} />
+                  {user.profile?.dokumenKtp && <p style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', marginTop: '4px' }}>✓ Sudah ada dokumen KTP tersimpan</p>}
                 </div>
               </div>
             </>

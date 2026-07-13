@@ -85,6 +85,31 @@ export default function ProfilePage() {
         )}
       </div>
 
+      {user.role === 'SISWA' && user.profile && (user.profile.dokumenKK || user.profile.dokumenAkte || user.profile.dokumenKtp) && (
+        <div className="glass-panel" style={{ marginTop: '24px' }}>
+          <h3 style={{ borderBottom: '1px solid var(--border-glass)', paddingBottom: '16px', marginBottom: '24px', fontSize: '1.1rem' }}>
+            Dokumen Pendukung
+          </h3>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            {user.profile.dokumenKK && (
+              <a href={user.profile.dokumenKK} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                📄 Lihat Kartu Keluarga
+              </a>
+            )}
+            {user.profile.dokumenAkte && (
+              <a href={user.profile.dokumenAkte} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                📄 Lihat Akte Kelahiran
+              </a>
+            )}
+            {user.profile.dokumenKtp && (
+              <a href={user.profile.dokumenKtp} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                📄 Lihat KTP/Kartu Pelajar
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* QR Code Section */}
       <div style={{ marginTop: '24px', display: 'flex', gap: '24px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
         <MemberQRCode

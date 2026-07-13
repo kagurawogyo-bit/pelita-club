@@ -68,6 +68,9 @@ export async function PATCH(
         namaIbu: data.namaIbu,
         nomorHp: data.nomorHp,
         sekolahAsal: data.sekolahAsal,
+        dokumenKK: data.dokumenKK !== undefined ? data.dokumenKK : undefined,
+        dokumenAkte: data.dokumenAkte !== undefined ? data.dokumenAkte : undefined,
+        dokumenKtp: data.dokumenKtp !== undefined ? data.dokumenKtp : undefined,
       }
     });
 

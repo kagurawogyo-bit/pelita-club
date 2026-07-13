@@ -58,6 +58,12 @@ model Profile {
   namaIbu       String?
   nomorHp       String?
   sekolahAsal   String?
+  
+  // Document Uploads
+  dokumenKK     String?
+  dokumenAkte   String?
+  dokumenKtp    String?
+  
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
