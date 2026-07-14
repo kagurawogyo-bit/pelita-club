@@ -7,13 +7,14 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [foto, setFoto] = useState<string | null>(user.profile?.foto || null);
   const [dokKK, setDokKK] = useState<string | null>(user.profile?.dokumenKK || null);
   const [dokAkte, setDokAkte] = useState<string | null>(user.profile?.dokumenAkte || null);
   const [dokKtp, setDokKtp] = useState<string | null>(user.profile?.dokumenKtp || null);
   const [deletingDoc, setDeletingDoc] = useState<string | null>(null);
 
-  const handleDeleteDoc = async (field: 'dokumenKK' | 'dokumenAkte' | 'dokumenKtp', label: string) => {
-    if (!confirm(`Apakah Anda yakin ingin menghapus dokumen ${label}?`)) return;
+  const handleDeleteDoc = async (field: 'foto' | 'dokumenKK' | 'dokumenAkte' | 'dokumenKtp', label: string) => {
+    if (!confirm(`Apakah Anda yakin ingin menghapus ${label}?`)) return;
     setDeletingDoc(field);
     try {
       const res = await fetch(`/api/users/${user.id}`, {
@@ -21,7 +22,8 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ [field]: null }),
       });
-      if (!res.ok) throw new Error('Gagal menghapus dokumen');
+      if (!res.ok) throw new Error(`Gagal menghapus ${label}`);
+      if (field === 'foto') setFoto(null);
       if (field === 'dokumenKK') setDokKK(null);
       if (field === 'dokumenAkte') setDokAkte(null);
       if (field === 'dokumenKtp') setDokKtp(null);
@@ -61,6 +63,9 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
         return undefined;
       };
 
+      const fotoUrl = await uploadFile('fileFoto', 'Foto');
+      if (fotoUrl) data.foto = fotoUrl;
+
       const dokumenKKUrl = await uploadFile('fileKK', 'KK');
       if (dokumenKKUrl) data.dokumenKK = dokumenKKUrl;
       
@@ -71,6 +76,7 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
       if (dokumenKtpUrl) data.dokumenKtp = dokumenKtpUrl;
 
       // Clean up file inputs from JSON data
+      delete data.fileFoto;
       delete data.fileKK;
       delete data.fileAkte;
       delete data.fileKtp;
@@ -114,6 +120,65 @@ export default function UserEditForm({ user, roleLabel, redirectUrl }: { user: a
 
           <h3 style={{ margin: '24px 0 16px', borderBottom: '1px solid var(--border-glass)', paddingBottom: '8px', fontSize: '1.1rem' }}>Biodata Diri</h3>
           
+          {/* Foto Profil 3x4 Section */}
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start', flexWrap: 'wrap', marginBottom: '24px', background: 'var(--bg-primary)', padding: '16px', borderRadius: '12px', border: '1px solid var(--border-glass)' }}>
+            <div style={{ flex: 1, minWidth: '240px' }}>
+              <label className="input-label" style={{ display: 'block', marginBottom: '6px' }}>Foto Profil 3x4 (Opsional)</label>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '12px' }}>
+                Unggah pas foto ukuran 3x4. Format gambar (JPG, JPEG, PNG) dengan ukuran maksimal 2MB.
+              </p>
+              <input 
+                type="file" 
+                name="fileFoto" 
+                accept="image/jpeg,image/png,image/jpg" 
+                className="input-field" 
+                style={{ padding: '8px', cursor: 'pointer', background: 'var(--bg-secondary)' }} 
+              />
+              {foto && (
+                <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+                  <a href={foto} target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '6px 12px', fontSize: '0.78rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
+                    👁️ Lihat Foto
+                  </a>
+                  <button 
+                    type="button" 
+                    onClick={() => handleDeleteDoc('foto', 'Foto Profil')} 
+                    disabled={deletingDoc === 'foto'}
+                    className="btn"
+                    style={{ padding: '6px 12px', fontSize: '0.78rem', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--accent-danger)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '6px', cursor: 'pointer' }}
+                  >
+                    {deletingDoc === 'foto' ? 'Menghapus...' : '🗑️ Hapus Foto'}
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', width: '105px', flexShrink: 0, margin: '0 auto' }}>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pratinjau</span>
+              <div style={{ 
+                width: '90px', 
+                height: '120px', 
+                borderRadius: '6px', 
+                border: '2px solid var(--border-glass)', 
+                overflow: 'hidden', 
+                background: 'var(--bg-secondary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: 'var(--shadow-sm)',
+                position: 'relative'
+              }}>
+                {foto ? (
+                  <img src={foto} alt="Foto Profil 3x4" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
+                    <span style={{ fontSize: '1.8rem', display: 'block' }}>👤</span>
+                    <span style={{ fontSize: '0.65rem', fontWeight: 600 }}>3 x 4</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="grid-cols-2">
             <div className="input-group">
               <label className="input-label">Nama Lengkap <span style={{ color: 'var(--accent-danger)' }}>*</span></label>

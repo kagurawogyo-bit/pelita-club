@@ -71,6 +71,7 @@ export async function PATCH(
         dokumenKK: data.dokumenKK !== undefined ? data.dokumenKK : undefined,
         dokumenAkte: data.dokumenAkte !== undefined ? data.dokumenAkte : undefined,
         dokumenKtp: data.dokumenKtp !== undefined ? data.dokumenKtp : undefined,
+        foto: data.foto !== undefined ? data.foto : undefined,
       }
     });
 

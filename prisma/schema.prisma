@@ -60,6 +60,7 @@ model Profile {
   sekolahAsal   String?
   
   // Document Uploads
+  foto          String?
   dokumenKK     String?
   dokumenAkte   String?
   dokumenKtp    String?

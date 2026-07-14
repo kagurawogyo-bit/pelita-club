@@ -131,12 +131,39 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
         </div>
 
         {/* Name badge */}
-        <div style={{ background: 'linear-gradient(135deg, #1e3a8a, #2563eb)', color: 'white', borderRadius: '10px', padding: '20px 28px', marginBottom: '32px' }}>
-          <div style={{ fontSize: '1.6rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em' }}>
-            {p?.namaLengkap || '-'}
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'stretch', marginBottom: '32px' }}>
+          <div style={{ flex: 1, background: 'linear-gradient(135deg, #1e3a8a, #2563eb)', color: 'white', borderRadius: '10px', padding: '20px 28px' }}>
+            <div style={{ fontSize: '1.6rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.02em' }}>
+              {p?.namaLengkap || '-'}
+            </div>
+            <div style={{ fontSize: '1rem', opacity: 0.85, marginTop: '4px' }}>
+              {p?.namaPanggilan ? `"${p.namaPanggilan}"` : ''} · {jenisKelamin} · {umur}
+            </div>
           </div>
-          <div style={{ fontSize: '1rem', opacity: 0.85, marginTop: '4px' }}>
-            {p?.namaPanggilan ? `"${p.namaPanggilan}"` : ''} · {jenisKelamin} · {umur}
+
+          {/* Foto Profil 3x4 */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px', flexShrink: 0 }}>
+            <div style={{
+              width: '90px',
+              height: '120px',
+              border: '2px solid #cbd5e1',
+              borderRadius: '6px',
+              overflow: 'hidden',
+              background: '#f8fafc',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              {p?.foto ? (
+                <img src={p.foto} alt="Foto Profil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                <div style={{ textAlign: 'center', color: '#94a3b8', padding: '4px' }}>
+                  <span style={{ fontSize: '1.6rem', display: 'block' }}>👤</span>
+                  <span style={{ fontSize: '0.6rem', fontWeight: 600, display: 'block' }}>FOTO 3x4</span>
+                </div>
+              )}
+            </div>
+            <span style={{ fontSize: '0.6rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pas Foto</span>
           </div>
         </div>
 

@@ -39,6 +39,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Format file tidak valid. Hanya PDF, JPG, dan PNG yang diizinkan." }, { status: 400 });
     }
 
+    if (type === 'Foto' && file.type === 'application/pdf') {
+      return NextResponse.json({ error: "Foto profil harus berupa gambar (JPG/PNG), bukan PDF." }, { status: 400 });
+    }
+
     const fileExt = file.name.split('.').pop();
     const fileName = `${decoded.userId}/${type}_${crypto.randomUUID()}.${fileExt}`;
     const arrayBuffer = await file.arrayBuffer();

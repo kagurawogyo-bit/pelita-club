@@ -59,27 +59,58 @@ export default function ProfilePage() {
             </button>
           </div>
         ) : (
-          <div className="grid-cols-2" style={{ gap: '24px' }}>
-            <div style={{ display: 'grid', gap: '16px' }}>
+          <div style={{ display: 'flex', gap: '28px', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+            {/* Foto Profil 3x4 */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+              <div style={{
+                width: '105px',
+                height: '140px',
+                borderRadius: '8px',
+                border: '2px solid var(--border-glass)',
+                overflow: 'hidden',
+                background: 'var(--bg-secondary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: 'var(--shadow-md)',
+              }}>
+                {user.profile.foto ? (
+                  <img src={user.profile.foto} alt="Foto Profil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
+                    <span style={{ fontSize: '2.5rem', display: 'block' }}>👤</span>
+                    <span style={{ fontSize: '0.7rem', fontWeight: 600 }}>3 × 4</span>
+                  </div>
+                )}
+              </div>
+              {user.profile.foto ? (
+                <a
+                  href={`/api/download?url=${encodeURIComponent(user.profile.foto)}&name=${encodeURIComponent(`Foto_${user.profile.namaLengkap || 'profil'}.jpg`)}`}
+                  className="btn btn-outline"
+                  style={{ padding: '5px 10px', fontSize: '0.72rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap' }}
+                >
+                  ⬇️ Unduh Foto
+                </a>
+              ) : (
+                <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textAlign: 'center' }}>Belum ada foto</span>
+              )}
+            </div>
+
+            {/* Grid Biodata */}
+            <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px 24px', minWidth: '280px' }}>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Nama Lengkap</strong> {user.profile.namaLengkap || '-'}</div>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Nama Panggilan</strong> {user.profile.namaPanggilan || '-'}</div>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>NIK</strong> {user.profile.nik || '-'}</div>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Nomor HP</strong> {user.profile.nomorHp || '-'}</div>
-              <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Alamat Lengkap</strong> {user.profile.alamat || '-'}</div>
-            </div>
-            <div style={{ display: 'grid', gap: '16px' }}>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Tempat, Tanggal Lahir</strong> {user.profile.tempatLahir || '-'}, {user.profile.tanggalLahir ? new Date(user.profile.tanggalLahir).toLocaleDateString('id-ID') : '-'}</div>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Jenis Kelamin</strong> {user.profile.jenisKelamin === 'LAKI_LAKI' ? 'Laki-laki' : user.profile.jenisKelamin === 'PEREMPUAN' ? 'Perempuan' : '-'}</div>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Agama</strong> {user.profile.agama || '-'}</div>
               <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Sekolah Asal</strong> {user.profile.sekolahAsal || '-'}</div>
-              <div className="grid-cols-2">
-                <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Tinggi Badan</strong> {user.profile.tinggiBadan || '-'} cm</div>
-                <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Berat Badan</strong> {user.profile.beratBadan || '-'} kg</div>
-              </div>
-              <div className="grid-cols-2">
-                <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Nama Ayah</strong> {user.profile.namaAyah || '-'}</div>
-                <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Nama Ibu</strong> {user.profile.namaIbu || '-'}</div>
-              </div>
+              <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Tinggi Badan</strong> {user.profile.tinggiBadan || '-'} cm</div>
+              <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Berat Badan</strong> {user.profile.beratBadan || '-'} kg</div>
+              <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Nama Ayah</strong> {user.profile.namaAyah || '-'}</div>
+              <div><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Nama Ibu</strong> {user.profile.namaIbu || '-'}</div>
+              <div style={{ gridColumn: '1 / -1' }}><strong style={{ display: 'block', color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '4px' }}>Alamat Lengkap</strong> {user.profile.alamat || '-'}</div>
             </div>
           </div>
         )}
