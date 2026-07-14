@@ -323,8 +323,8 @@ export default function AttendanceManager({
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', minWidth: '1200px' }}>
             <thead>
               <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                <th style={{ padding: '20px 16px', textAlign: 'left', width: '60px' }}>NO</th>
-                <th style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                <th className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px' }}>NO</th>
+                <th className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
                 {columns.map(col => (
                   <th key={col} style={{ padding: '20px 8px', fontWeight: 700 }}>{col}</th>
                 ))}
@@ -343,8 +343,8 @@ export default function AttendanceManager({
                   const actualIndex = itemsPerPage === "all" ? index + 1 : (currentPage - 1) * (itemsPerPage as number) + index + 1;
                   return (
                   <tr key={student.id} style={{ borderBottom: '1px solid var(--border-glass)', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.02)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
-                    <td style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem' }}>{actualIndex}</td>
-                    <td style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                    <td className="sticky-col-no" style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem' }}>{actualIndex}</td>
+                    <td className="sticky-col-name" style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem' }}>
                       {student.profile?.namaLengkap || student.namaLengkap}
                       {(student.profile?.namaPanggilan || student.namaPanggilan) ? (
                         <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px', fontWeight: 500 }}>

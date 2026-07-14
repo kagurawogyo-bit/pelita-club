@@ -502,3 +502,46 @@ a {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
+
+/* Sticky Table Columns for Attendance Manager */
+.sticky-col-no {
+  position: sticky !important;
+  left: 0;
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
+  z-index: 2;
+  background-color: var(--bg-secondary) !important;
+}
+
+.sticky-col-name {
+  position: sticky !important;
+  left: 60px;
+  min-width: 200px;
+  z-index: 2;
+  background-color: var(--bg-secondary) !important;
+  border-right: 1px solid var(--border-glass) !important;
+}
+
+/* Sticky Headers */
+tr th.sticky-col-no {
+  z-index: 3 !important;
+  background-color: var(--bg-primary) !important;
+}
+
+tr th.sticky-col-name {
+  z-index: 3 !important;
+  background-color: var(--bg-primary) !important;
+  border-right: 1px solid var(--border-glass) !important;
+}
+
+/* Row Hover Highlights on Sticky Cells */
+tr:hover .sticky-col-no,
+tr:hover .sticky-col-name {
+  background-color: rgba(14, 165, 233, 0.06) !important;
+}
+
+[data-theme='dark'] tr:hover .sticky-col-no,
+[data-theme='dark'] tr:hover .sticky-col-name {
+  background-color: rgba(56, 189, 248, 0.08) !important;
+}
