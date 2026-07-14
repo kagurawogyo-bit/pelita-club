@@ -107,121 +107,186 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
         <div className="no-print" style={{
           background: 'var(--bg-secondary)',
           border: '1px solid var(--border-glass)',
-          borderRadius: '12px',
-          padding: '20px 24px',
-          marginBottom: '24px',
+          borderRadius: '16px',
+          padding: '24px',
+          marginBottom: '28px',
+          boxShadow: 'var(--shadow-sm)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
-            <span style={{ fontSize: '1.1rem' }}>📂</span>
-            <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: 0 }}>Unduh Dokumen Anggota</h3>
-            <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginLeft: '4px' }}>— klik tombol untuk mengunduh</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+            <span style={{ fontSize: '1.25rem' }}>📂</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <h3 style={{ fontSize: '1.05rem', fontWeight: 700, margin: 0, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>Dokumen Lampiran</h3>
+              <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>Daftar dokumen pendukung siswa yang telah diunggah</span>
+            </div>
           </div>
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+            gap: '16px'
+          }}>
             {/* Foto Profil */}
             {p?.foto && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0', border: '1px solid #6366f1', borderRadius: '8px', overflow: 'hidden' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 14px', background: '#eef2ff', color: '#4338ca', fontSize: '0.88rem', fontWeight: 600 }}>
-                  <img src={p.foto} alt="Foto" style={{ width: '28px', height: '36px', objectFit: 'cover', borderRadius: '3px', border: '1px solid #c7d2fe' }} />
-                  Foto Profil 3×4
+              <div className="glass-card" style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 16px',
+                background: 'var(--bg-primary)',
+                border: '1px solid var(--border-glass)',
+                borderRadius: '12px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+                  <div style={{ width: '36px', height: '48px', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--border-glass)', flexShrink: 0 }}>
+                    <img src={p.foto} alt="Foto Profil" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Foto Profil</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>Pas Foto 3×4</span>
+                  </div>
                 </div>
-                <a
-                  href={p.foto}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '10px 12px', background: '#c7d2fe', color: '#3730a3', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, borderLeft: '1px solid #a5b4fc' }}
-                  title="Buka Foto"
-                >
-                  👁️
-                </a>
-                <a
-                  href={`/api/download?url=${encodeURIComponent(p.foto)}&name=${encodeURIComponent(`Foto_${p?.namaLengkap || 'profil'}.jpg`)}`}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '10px 12px', background: '#818cf8', color: 'white', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, borderLeft: '1px solid #a5b4fc' }}
-                  title="Unduh Foto"
-                >
-                  ⬇️ Unduh
-                </a>
+                <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
+                  <a
+                    href={p.foto}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-action-view"
+                    title="Buka Foto"
+                  >
+                    👁️
+                  </a>
+                  <a
+                    href={`/api/download?url=${encodeURIComponent(p.foto)}&name=${encodeURIComponent(`Foto_${p?.namaLengkap || 'profil'}.jpg`)}`}
+                    className="btn-action-download"
+                    title="Unduh Foto"
+                  >
+                    ⬇️
+                  </a>
+                </div>
               </div>
             )}
 
             {/* Kartu Keluarga */}
             {p?.dokumenKK && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0', border: '1px solid #3b82f6', borderRadius: '8px', overflow: 'hidden' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '10px 14px', background: '#eff6ff', color: '#1d4ed8', fontSize: '0.88rem', fontWeight: 600 }}>
-                  📋 Kartu Keluarga (KK)
+              <div className="glass-card" style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 16px',
+                background: 'var(--bg-primary)',
+                border: '1px solid var(--border-glass)',
+                borderRadius: '12px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', border: '1px solid rgba(59, 130, 246, 0.2)', flexShrink: 0 }}>
+                    📄
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Kartu Keluarga (KK)</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>Dokumen KK</span>
+                  </div>
                 </div>
-                <a
-                  href={p.dokumenKK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '10px 12px', background: '#dbeafe', color: '#1d4ed8', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, borderLeft: '1px solid #93c5fd' }}
-                  title="Buka KK"
-                >
-                  👁️
-                </a>
-                <a
-                  href={`/api/download?url=${encodeURIComponent(p.dokumenKK)}&name=${encodeURIComponent(`KK_${p?.namaLengkap || 'siswa'}.${p.dokumenKK.split('.').pop()?.split('?')[0] || 'jpg'}`)}`}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '10px 12px', background: '#3b82f6', color: 'white', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, borderLeft: '1px solid #93c5fd' }}
-                  title="Unduh KK"
-                >
-                  ⬇️ Unduh
-                </a>
+                <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
+                  <a
+                    href={p.dokumenKK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-action-view"
+                    title="Buka KK"
+                  >
+                    👁️
+                  </a>
+                  <a
+                    href={`/api/download?url=${encodeURIComponent(p.dokumenKK)}&name=${encodeURIComponent(`KK_${p?.namaLengkap || 'siswa'}.${p.dokumenKK.split('.').pop()?.split('?')[0] || 'jpg'}`)}`}
+                    className="btn-action-download"
+                    title="Unduh KK"
+                  >
+                    ⬇️
+                  </a>
+                </div>
               </div>
             )}
 
             {/* Akte Kelahiran */}
             {p?.dokumenAkte && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0', border: '1px solid #10b981', borderRadius: '8px', overflow: 'hidden' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '10px 14px', background: '#ecfdf5', color: '#065f46', fontSize: '0.88rem', fontWeight: 600 }}>
-                  📋 Akte Kelahiran
+              <div className="glass-card" style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 16px',
+                background: 'var(--bg-primary)',
+                border: '1px solid var(--border-glass)',
+                borderRadius: '12px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', border: '1px solid rgba(16, 185, 129, 0.2)', flexShrink: 0 }}>
+                    📄
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Akte Kelahiran</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>Dokumen Akte</span>
+                  </div>
                 </div>
-                <a
-                  href={p.dokumenAkte}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '10px 12px', background: '#d1fae5', color: '#065f46', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, borderLeft: '1px solid #6ee7b7' }}
-                  title="Buka Akte"
-                >
-                  👁️
-                </a>
-                <a
-                  href={`/api/download?url=${encodeURIComponent(p.dokumenAkte)}&name=${encodeURIComponent(`Akte_${p?.namaLengkap || 'siswa'}.${p.dokumenAkte.split('.').pop()?.split('?')[0] || 'jpg'}`)}`}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '10px 12px', background: '#10b981', color: 'white', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, borderLeft: '1px solid #6ee7b7' }}
-                  title="Unduh Akte"
-                >
-                  ⬇️ Unduh
-                </a>
+                <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
+                  <a
+                    href={p.dokumenAkte}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-action-view"
+                    title="Buka Akte"
+                  >
+                    👁️
+                  </a>
+                  <a
+                    href={`/api/download?url=${encodeURIComponent(p.dokumenAkte)}&name=${encodeURIComponent(`Akte_${p?.namaLengkap || 'siswa'}.${p.dokumenAkte.split('.').pop()?.split('?')[0] || 'jpg'}`)}`}
+                    className="btn-action-download"
+                    title="Unduh Akte"
+                  >
+                    ⬇️
+                  </a>
+                </div>
               </div>
             )}
 
             {/* KTP / Kartu Pelajar */}
             {p?.dokumenKtp && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0', border: '1px solid #f59e0b', borderRadius: '8px', overflow: 'hidden' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '10px 14px', background: '#fffbeb', color: '#92400e', fontSize: '0.88rem', fontWeight: 600 }}>
-                  📋 KTP / Kartu Pelajar
+              <div className="glass-card" style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 16px',
+                background: 'var(--bg-primary)',
+                border: '1px solid var(--border-glass)',
+                borderRadius: '12px',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', border: '1px solid rgba(245, 158, 11, 0.2)', flexShrink: 0 }}>
+                    📄
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>KTP / Kartu Pelajar</span>
+                    <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)' }}>Identitas Diri</span>
+                  </div>
                 </div>
-                <a
-                  href={p.dokumenKtp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '10px 12px', background: '#fde68a', color: '#92400e', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, borderLeft: '1px solid #fcd34d' }}
-                  title="Buka KTP"
-                >
-                  👁️
-                </a>
-                <a
-                  href={`/api/download?url=${encodeURIComponent(p.dokumenKtp)}&name=${encodeURIComponent(`KTP_${p?.namaLengkap || 'siswa'}.${p.dokumenKtp.split('.').pop()?.split('?')[0] || 'jpg'}`)}`}
-                  style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '10px 12px', background: '#f59e0b', color: 'white', textDecoration: 'none', fontSize: '0.8rem', fontWeight: 700, borderLeft: '1px solid #fcd34d' }}
-                  title="Unduh KTP"
-                >
-                  ⬇️ Unduh
-                </a>
+                <div style={{ display: 'flex', gap: '6px', flexShrink: 0 }}>
+                  <a
+                    href={p.dokumenKtp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-action-view"
+                    title="Buka KTP"
+                  >
+                    👁️
+                  </a>
+                  <a
+                    href={`/api/download?url=${encodeURIComponent(p.dokumenKtp)}&name=${encodeURIComponent(`KTP_${p?.namaLengkap || 'siswa'}.${p.dokumenKtp.split('.').pop()?.split('?')[0] || 'jpg'}`)}`}
+                    className="btn-action-download"
+                    title="Unduh KTP"
+                  >
+                    ⬇️
+                  </a>
+                </div>
               </div>
-            )}
-
-            {/* Jika tidak ada dokumen sama sekali */}
-            {!p?.foto && !p?.dokumenKK && !p?.dokumenAkte && !p?.dokumenKtp && (
-              <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', fontStyle: 'italic' }}>Belum ada dokumen yang diunggah.</span>
             )}
           </div>
         </div>
@@ -383,6 +448,45 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
 
       {/* Print CSS */}
       <style>{`
+        .btn-action-view {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: var(--bg-secondary);
+          border: 1px solid var(--border-glass);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none !important;
+          font-size: 0.9rem;
+          transition: all 0.2s ease;
+          color: var(--text-primary);
+          cursor: pointer;
+        }
+        .btn-action-view:hover {
+          background: var(--border-glass);
+          transform: translateY(-1px);
+        }
+        .btn-action-download {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: var(--accent-primary);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none !important;
+          color: white !important;
+          font-size: 0.9rem;
+          transition: all 0.2s ease;
+          cursor: pointer;
+        }
+        .btn-action-download:hover {
+          opacity: 0.9;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+        }
+
         @media print {
           .no-print,
           header,
