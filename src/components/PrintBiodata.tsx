@@ -331,7 +331,7 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
 
         {/* Dokumen Pendukung */}
         {hasDokumen && (
-          <div style={{ marginTop: '28px', borderTop: '2px solid #e2e8f0', paddingTop: '24px' }}>
+          <div className="no-print" style={{ marginTop: '28px', borderTop: '2px solid #e2e8f0', paddingTop: '24px' }}>
             <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#2563eb', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '16px' }}>
               Dokumen Pendukung
             </div>
@@ -348,7 +348,7 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
 
         {/* Status dokumen jika belum ada */}
         {!hasDokumen && (
-          <div style={{ marginTop: '28px', borderTop: '2px solid #e2e8f0', paddingTop: '20px' }}>
+          <div className="no-print" style={{ marginTop: '28px', borderTop: '2px solid #e2e8f0', paddingTop: '20px' }}>
             <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#2563eb', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '12px' }}>
               Dokumen Pendukung
             </div>
