@@ -545,3 +545,31 @@ tr:hover .sticky-col-name {
 [data-theme='dark'] tr:hover .sticky-col-name {
   background-color: rgba(56, 189, 248, 0.08) !important;
 }
+
+/* Global Print Utilities */
+@media print {
+  .no-print,
+  header,
+  .glass-sidebar-container,
+  .sidebar-overlay {
+    display: none !important;
+  }
+
+  body, html {
+    background: white !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .dashboard-theme-container,
+  .dashboard-theme-container > div {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  main {
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+}

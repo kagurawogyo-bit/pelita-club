@@ -376,7 +376,7 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ marginBottom: '48px' }}>Tanda Tangan Pengurus,</div>
-            <div style={{ borderTop: '1px solid #111', paddingTop: '4px', minWidth: '160px' }}>(...........................)</div>
+            <div style={{ minWidth: '160px', display: 'inline-block', textAlign: 'center' }}>(...................................)</div>
           </div>
         </div>
       </div>
@@ -384,13 +384,37 @@ export default function PrintBiodata({ user }: { user: any /* eslint-disable-lin
       {/* Print CSS */}
       <style>{`
         @media print {
-          .no-print { display: none !important; }
-          body { background: white !important; }
+          .no-print,
+          header,
+          .glass-sidebar-container,
+          .sidebar-overlay {
+            display: none !important;
+          }
+          body, html {
+            background: white !important;
+            height: auto !important;
+            overflow: visible !important;
+          }
+          .dashboard-theme-container {
+            display: block !important;
+            height: auto !important;
+            overflow: visible !important;
+          }
+          .dashboard-theme-container > div {
+            display: block !important;
+            height: auto !important;
+            overflow: visible !important;
+          }
+          main {
+            padding: 0 !important;
+            overflow: visible !important;
+          }
           #print-area {
             box-shadow: none !important;
             border-radius: 0 !important;
             padding: 20px !important;
             max-width: 100% !important;
+            margin: 0 !important;
           }
         }
       `}</style>
