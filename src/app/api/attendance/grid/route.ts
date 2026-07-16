@@ -83,6 +83,30 @@ export async function POST(req: Request) {
 
     // If coachIds are provided and status is "✓", also update coach attendance
     if (Array.isArray(coachIds) && status === "✓") {
+      // Find student to check age group
+      const student = await prisma.user.findUnique({
+        where: { id: userId },
+        include: { profile: true }
+      });
+
+      let isSd = true;
+      if (student?.profile?.tanggalLahir) {
+        const birthDate = new Date(student.profile.tanggalLahir);
+        const today = new Date();
+        let umur = today.getFullYear() - birthDate.getFullYear();
+        const m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          umur--;
+        }
+        if (umur >= 13) {
+          isSd = false; // SMP-SMA
+        }
+      }
+
+      const coachCol = eventType === "REGULAR" 
+        ? (isSd ? `${column}_SD` : `${column}_SMP_SMA`)
+        : column;
+
       for (const coachId of coachIds) {
         await prisma.gridAttendance.upsert({
           where: {
@@ -90,7 +114,7 @@ export async function POST(req: Request) {
               userId: coachId,
               month,
               year,
-              column,
+              column: coachCol,
               eventType
             }
           },
@@ -99,7 +123,7 @@ export async function POST(req: Request) {
             userId: coachId,
             month,
             year,
-            column,
+            column: coachCol,
             status: "✓",
             eventType
           }

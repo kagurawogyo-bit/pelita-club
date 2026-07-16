@@ -61,6 +61,30 @@ export async function POST(req: Request) {
       },
     });
 
+    // Ambil kelompok umur siswa
+    const student = await prisma.user.findUnique({
+      where: { id: userId },
+      include: { profile: true }
+    });
+
+    let isSd = true;
+    if (student?.profile?.tanggalLahir) {
+      const birthDate = new Date(student.profile.tanggalLahir);
+      const today = new Date();
+      let umur = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        umur--;
+      }
+      if (umur >= 13) {
+        isSd = false;
+      }
+    }
+
+    const coachCol = eventType === "REGULAR" 
+      ? (isSd ? `${column}_SD` : `${column}_SMP_SMA`)
+      : column;
+
     // Juga catat kehadiran pelatih secara otomatis untuk semua yang terdaftar di sesi
     const coachIdsList = session.coachIds ? session.coachIds.split(",") : [session.coachId];
     
@@ -72,7 +96,7 @@ export async function POST(req: Request) {
           where: {
             userId_month_year_column_eventType: {
               userId: coachId,
-              column,
+              column: coachCol,
               month,
               year,
               eventType,
@@ -85,7 +109,7 @@ export async function POST(req: Request) {
             where: {
               userId_month_year_column_eventType: {
                 userId: coachId,
-                column,
+                column: coachCol,
                 month,
                 year,
                 eventType,
@@ -94,7 +118,7 @@ export async function POST(req: Request) {
             update: { status: "✓" },
             create: {
               userId: coachId,
-              column,
+              column: coachCol,
               month,
               year,
               status: "✓",

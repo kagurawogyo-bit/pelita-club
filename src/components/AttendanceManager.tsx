@@ -16,7 +16,8 @@ export default function AttendanceManager({
   coaches = [],
   readOnly = false,
   eventType = "REGULAR",
-  customColumns
+  customColumns,
+  isCoach = false
 }: { 
   initialStudents: any[], 
   customGroups?: string[] 
@@ -26,6 +27,7 @@ export default function AttendanceManager({
   readOnly?: boolean
   eventType?: string
   customColumns?: string[]
+  isCoach?: boolean
 }) {
   const [selectedGroup, setSelectedGroup] = useState("Semua Kelompok");
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
@@ -139,9 +141,17 @@ export default function AttendanceManager({
 
     // If it's Student Attendance and coaches are selected, automatically mark coaches as "✓"
     if (title === "Absensi Siswa" && selectedCoachIds.length > 0 && nextStatus === "✓") {
+        // Determine coach sub-column based on student's age group
+        const student = initialStudents.find(s => s.id === studentId);
+        const ageGroup = student?.kelompokUmur || "";
+        const isSd = ["Di bawah 7 tahun", "7-8 tahun", "9-10 tahun", "11-12 tahun"].includes(ageGroup);
+        const coachCol = eventType === "REGULAR" 
+          ? (isSd ? `${col}_SD` : `${col}_SMP_SMA`)
+          : col;
+
         selectedCoachIds.forEach(coachId => {
             if (!newData[coachId]) newData[coachId] = {};
-            newData[coachId][col] = "✓";
+            newData[coachId][coachCol] = "✓";
         });
     }
     
@@ -322,22 +332,41 @@ export default function AttendanceManager({
         <div className="attendance-table-container" style={{ padding: '1px' }}>
           <table className="attendance-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', minWidth: '1200px' }}>
             <thead>
-              <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                <th className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px' }}>NO</th>
-                <th className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
-                {columns.map(col => (
-                  <th key={col} style={{ padding: '20px 8px', fontWeight: 700 }}>{col}</th>
-                ))}
-              </tr>
+              {isCoach ? (
+                <>
+                  <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <th rowSpan={2} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px' }}>NO</th>
+                    <th rowSpan={2} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                    {columns.map(col => (
+                      <th key={col} colSpan={2} style={{ padding: '10px 8px', fontWeight: 700, borderBottom: '1px solid var(--border-glass)' }}>{col}</th>
+                    ))}
+                  </tr>
+                  <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.7rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                    {columns.map(col => (
+                      <>
+                        <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 600, borderRight: '1px solid var(--border-glass)', fontSize: '0.7rem' }}>ku sd</th>
+                        <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 600, fontSize: '0.7rem' }}>ku smp-sma</th>
+                      </>
+                    ))}
+                  </tr>
+                </>
+              ) : (
+                <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <th className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px' }}>NO</th>
+                  <th className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                  {columns.map(col => (
+                    <th key={col} style={{ padding: '20px 8px', fontWeight: 700 }}>{col}</th>
+                  ))}
+                </tr>
+              )}
             </thead>
             <tbody>
               {processedStudents.length === 0 ? (
                 <tr>
-                  <td colSpan={columns.length + 2} style={{ padding: '48px', color: 'var(--text-secondary)', fontSize: '1rem' }}>
+                  <td colSpan={isCoach ? (columns.length * 2) + 2 : columns.length + 2} style={{ padding: '48px', color: 'var(--text-secondary)', fontSize: '1rem' }}>
                     {title === "Absensi Pelatih" ? "Tidak ada data pelatih ditemukan." : "Tidak ada data siswa ditemukan."}
                   </td>
                 </tr>
-
               ) : (
                 processedStudents.map((student: any /* eslint-disable-line @typescript-eslint/no-explicit-any */, index: number) => {
                   const actualIndex = itemsPerPage === "all" ? index + 1 : (currentPage - 1) * (itemsPerPage as number) + index + 1;
@@ -352,48 +381,131 @@ export default function AttendanceManager({
                         </div>
                       ) : null}
                     </td>
-                    {columns.map((col) => {
-                      const status = (attendanceData[student.id] && attendanceData[student.id][col]) || "-";
-                      const style = statusStyles[status];
-                      
-                      return (
-                        <td key={col} style={{ padding: '8px 4px' }}>
-                          <div 
-                            onClick={() => handleToggle(student.id, col)}
-                            style={{ 
-                              width: '36px', height: '36px', 
-                              margin: '0 auto', 
-                              display: 'flex', alignItems: 'center', justifyContent: 'center',
-                              borderRadius: '8px',
-                              background: style.bg,
-                              color: style.color,
-                              border: style.border,
-                              boxShadow: style.shadow,
-                              cursor: readOnly ? 'default' : 'pointer',
-                              userSelect: 'none',
-                              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                              fontWeight: 800,
-                              fontSize: '1rem'
-                            }}
-                            onMouseOver={(e) => {
-                                if (status === "-" && !readOnly) {
-                                    e.currentTarget.style.borderColor = 'var(--accent-primary)';
-                                    e.currentTarget.style.transform = 'scale(1.1)';
-                                }
-                            }}
-                            onMouseOut={(e) => {
-                                if (status === "-" && !readOnly) {
-                                    e.currentTarget.style.borderColor = 'var(--border-glass)';
-                                    e.currentTarget.style.transform = 'scale(1)';
-                                }
-                            }}
-                          >
-                            {status === "✓" ? "✓" : "-"}
-                          </div>
+                    {isCoach ? (
+                      columns.map((col) => {
+                        const colSd = `${col}_SD`;
+                        const colSmp = `${col}_SMP_SMA`;
+                        const statusSd = (attendanceData[student.id] && attendanceData[student.id][colSd]) || "-";
+                        const statusSmp = (attendanceData[student.id] && attendanceData[student.id][colSmp]) || "-";
+                        const styleSd = statusStyles[statusSd];
+                        const styleSmp = statusStyles[statusSmp];
 
-                        </td>
-                      );
-                    })}
+                        return (
+                          <>
+                            <td key={`${col}-sd`} style={{ padding: '6px 2px', borderRight: '1px solid var(--border-glass)' }}>
+                              <div 
+                                onClick={() => handleToggle(student.id, colSd)}
+                                style={{ 
+                                  width: '32px', height: '32px', 
+                                  margin: '0 auto', 
+                                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                  borderRadius: '6px',
+                                  background: styleSd.bg,
+                                  color: styleSd.color,
+                                  border: styleSd.border,
+                                  boxShadow: styleSd.shadow,
+                                  cursor: readOnly ? 'default' : 'pointer',
+                                  userSelect: 'none',
+                                  transition: 'all 0.2s',
+                                  fontWeight: 800,
+                                  fontSize: '0.85rem'
+                                }}
+                                onMouseOver={(e) => {
+                                    if (statusSd === "-" && !readOnly) {
+                                        e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                                        e.currentTarget.style.transform = 'scale(1.1)';
+                                    }
+                                }}
+                                onMouseOut={(e) => {
+                                    if (statusSd === "-" && !readOnly) {
+                                        e.currentTarget.style.borderColor = 'var(--border-glass)';
+                                        e.currentTarget.style.transform = 'scale(1)';
+                                    }
+                                }}
+                              >
+                                {statusSd === "✓" ? "✓" : "-"}
+                              </div>
+                            </td>
+                            <td key={`${col}-smp`} style={{ padding: '6px 2px' }}>
+                              <div 
+                                onClick={() => handleToggle(student.id, colSmp)}
+                                style={{ 
+                                  width: '32px', height: '32px', 
+                                  margin: '0 auto', 
+                                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                  borderRadius: '6px',
+                                  background: styleSmp.bg,
+                                  color: styleSmp.color,
+                                  border: styleSmp.border,
+                                  boxShadow: styleSmp.shadow,
+                                  cursor: readOnly ? 'default' : 'pointer',
+                                  userSelect: 'none',
+                                  transition: 'all 0.2s',
+                                  fontWeight: 800,
+                                  fontSize: '0.85rem'
+                                }}
+                                onMouseOver={(e) => {
+                                    if (statusSmp === "-" && !readOnly) {
+                                        e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                                        e.currentTarget.style.transform = 'scale(1.1)';
+                                    }
+                                }}
+                                onMouseOut={(e) => {
+                                    if (statusSmp === "-" && !readOnly) {
+                                        e.currentTarget.style.borderColor = 'var(--border-glass)';
+                                        e.currentTarget.style.transform = 'scale(1)';
+                                    }
+                                }}
+                              >
+                                {statusSmp === "✓" ? "✓" : "-"}
+                              </div>
+                            </td>
+                          </>
+                        );
+                      })
+                    ) : (
+                      columns.map((col) => {
+                        const status = (attendanceData[student.id] && attendanceData[student.id][col]) || "-";
+                        const style = statusStyles[status];
+                        
+                        return (
+                          <td key={col} style={{ padding: '8px 4px' }}>
+                            <div 
+                              onClick={() => handleToggle(student.id, col)}
+                              style={{ 
+                                width: '36px', height: '36px', 
+                                margin: '0 auto', 
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                borderRadius: '8px',
+                                background: style.bg,
+                                color: style.color,
+                                border: style.border,
+                                boxShadow: style.shadow,
+                                cursor: readOnly ? 'default' : 'pointer',
+                                userSelect: 'none',
+                                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                                fontWeight: 800,
+                                fontSize: '1rem'
+                              }}
+                              onMouseOver={(e) => {
+                                  if (status === "-" && !readOnly) {
+                                      e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                                      e.currentTarget.style.transform = 'scale(1.1)';
+                                  }
+                              }}
+                              onMouseOut={(e) => {
+                                  if (status === "-" && !readOnly) {
+                                      e.currentTarget.style.borderColor = 'var(--border-glass)';
+                                      e.currentTarget.style.transform = 'scale(1)';
+                                  }
+                              }}
+                            >
+                              {status === "✓" ? "✓" : "-"}
+                            </div>
+                          </td>
+                        );
+                      })
+                    )}
                   </tr>
                 )})
               )}

@@ -44,6 +44,7 @@ export default async function CoachAttendancePage() {
       initialStudents={formattedCoaches} 
       title="Absensi Pelatih"
       customGroups={["Pelatih"]}
+      isCoach={true}
     />
   );
 }
