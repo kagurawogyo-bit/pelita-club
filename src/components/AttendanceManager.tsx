@@ -335,28 +335,60 @@ export default function AttendanceManager({
               {isCoach ? (
                 <>
                   <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    <th rowSpan={2} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px' }}>NO</th>
-                    <th rowSpan={2} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
-                    {columns.map(col => (
-                      <th key={col} colSpan={2} style={{ padding: '10px 8px', fontWeight: 700, borderBottom: '1px solid var(--border-glass)' }}>{col}</th>
-                    ))}
+                    <th rowSpan={2} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderBottom: '1px solid var(--border-glass)', borderRight: '1px solid var(--border-glass)' }}>NO</th>
+                    <th rowSpan={2} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderBottom: '1px solid var(--border-glass)', borderRight: '1.5px solid var(--border-glass)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                    {columns.map((col, idx) => {
+                      const isOdd = idx % 2 === 0;
+                      return (
+                        <th 
+                          key={col} 
+                          colSpan={2} 
+                          style={{ 
+                            padding: '10px 8px', 
+                            fontWeight: 700, 
+                            borderBottom: '1px solid var(--border-glass)',
+                            borderRight: '1.5px solid var(--border-glass)',
+                            backgroundColor: isOdd ? 'var(--sidebar-active)' : 'var(--bg-primary)'
+                          }}
+                        >
+                          {col}
+                        </th>
+                      );
+                    })}
                   </tr>
                   <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.7rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
-                    {columns.map(col => (
-                      <>
-                        <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 600, borderRight: '1px solid var(--border-glass)', fontSize: '0.7rem' }}>ku sd</th>
-                        <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 600, fontSize: '0.7rem' }}>ku smp-sma</th>
-                      </>
-                    ))}
+                    {columns.map((col, idx) => {
+                      const isOdd = idx % 2 === 0;
+                      const bgColor = isOdd ? 'var(--sidebar-active)' : 'var(--bg-primary)';
+                      return (
+                        <>
+                          <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 600, borderRight: '1px solid var(--border-glass)', fontSize: '0.7rem', backgroundColor: bgColor }}>ku sd</th>
+                          <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 600, borderRight: '1.5px solid var(--border-glass)', fontSize: '0.7rem', backgroundColor: bgColor }}>ku smp-sma</th>
+                        </>
+                      );
+                    })}
                   </tr>
                 </>
               ) : (
                 <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  <th className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px' }}>NO</th>
-                  <th className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
-                  {columns.map(col => (
-                    <th key={col} style={{ padding: '20px 8px', fontWeight: 700 }}>{col}</th>
-                  ))}
+                  <th className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderRight: '1px solid var(--border-glass)' }}>NO</th>
+                  <th className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderRight: '1.5px solid var(--border-glass)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                  {columns.map((col, idx) => {
+                    const isOdd = idx % 2 === 0;
+                    return (
+                      <th 
+                        key={col} 
+                        style={{ 
+                          padding: '20px 8px', 
+                          fontWeight: 700,
+                          borderRight: '1px solid var(--border-glass)',
+                          backgroundColor: isOdd ? 'var(--sidebar-active)' : 'var(--bg-primary)'
+                        }}
+                      >
+                        {col}
+                      </th>
+                    );
+                  })}
                 </tr>
               )}
             </thead>
@@ -372,8 +404,8 @@ export default function AttendanceManager({
                   const actualIndex = itemsPerPage === "all" ? index + 1 : (currentPage - 1) * (itemsPerPage as number) + index + 1;
                   return (
                   <tr key={student.id} style={{ borderBottom: '1px solid var(--border-glass)', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.02)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
-                    <td className="sticky-col-no" style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem' }}>{actualIndex}</td>
-                    <td className="sticky-col-name" style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem' }}>
+                    <td className="sticky-col-no" style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem', borderRight: '1px solid var(--border-glass)' }}>{actualIndex}</td>
+                    <td className="sticky-col-name" style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem', borderRight: '1.5px solid var(--border-glass)' }}>
                       {student.profile?.namaLengkap || student.namaLengkap}
                       {(student.profile?.namaPanggilan || student.namaPanggilan) ? (
                         <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px', fontWeight: 500 }}>
@@ -382,7 +414,7 @@ export default function AttendanceManager({
                       ) : null}
                     </td>
                     {isCoach ? (
-                      columns.map((col) => {
+                      columns.map((col, idx) => {
                         const colSd = `${col}_SD`;
                         const colSmp = `${col}_SMP_SMA`;
                         const statusSd = (attendanceData[student.id] && attendanceData[student.id][colSd]) || "-";
@@ -390,9 +422,12 @@ export default function AttendanceManager({
                         const styleSd = statusStyles[statusSd];
                         const styleSmp = statusStyles[statusSmp];
 
+                        const isOdd = idx % 2 === 0;
+                        const cellBg = isOdd ? 'var(--sidebar-active)' : 'transparent';
+
                         return (
                           <>
-                            <td key={`${col}-sd`} style={{ padding: '6px 2px', borderRight: '1px solid var(--border-glass)' }}>
+                            <td key={`${col}-sd`} style={{ padding: '6px 2px', borderRight: '1px solid var(--border-glass)', backgroundColor: cellBg }}>
                               <div 
                                 onClick={() => handleToggle(student.id, colSd)}
                                 style={{ 
@@ -426,7 +461,7 @@ export default function AttendanceManager({
                                 {statusSd === "✓" ? "✓" : "-"}
                               </div>
                             </td>
-                            <td key={`${col}-smp`} style={{ padding: '6px 2px' }}>
+                            <td key={`${col}-smp`} style={{ padding: '6px 2px', borderRight: '1.5px solid var(--border-glass)', backgroundColor: cellBg }}>
                               <div 
                                 onClick={() => handleToggle(student.id, colSmp)}
                                 style={{ 
@@ -464,12 +499,15 @@ export default function AttendanceManager({
                         );
                       })
                     ) : (
-                      columns.map((col) => {
+                      columns.map((col, idx) => {
                         const status = (attendanceData[student.id] && attendanceData[student.id][col]) || "-";
                         const style = statusStyles[status];
                         
+                        const isOdd = idx % 2 === 0;
+                        const cellBg = isOdd ? 'var(--sidebar-active)' : 'transparent';
+
                         return (
-                          <td key={col} style={{ padding: '8px 4px' }}>
+                          <td key={col} style={{ padding: '8px 4px', borderRight: '1px solid var(--border-glass)', backgroundColor: cellBg }}>
                             <div 
                               onClick={() => handleToggle(student.id, col)}
                               style={{ 
