@@ -319,8 +319,8 @@ export default function AttendanceManager({
 
 
       <div className="glass-card">
-        <div style={{ overflowX: 'auto', padding: '1px' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', minWidth: '1200px' }}>
+        <div className="attendance-table-container" style={{ padding: '1px' }}>
+          <table className="attendance-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', minWidth: '1200px' }}>
             <thead>
               <tr style={{ background: 'var(--bg-primary)', borderBottom: '1px solid var(--border-glass)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 <th className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px' }}>NO</th>
