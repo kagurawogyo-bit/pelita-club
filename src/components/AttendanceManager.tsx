@@ -206,7 +206,7 @@ export default function AttendanceManager({
   return (
     <div className="animate-fade-in" style={{ maxWidth: '1400px', margin: '0 auto', opacity: loading ? 0.7 : 1 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
-        <h2 style={{ fontSize: '2.25rem', fontWeight: 800, letterSpacing: '-0.025em' }}>{title}</h2>
+        <h2 className="attendance-page-title" style={{ fontSize: '2.25rem', fontWeight: 800, letterSpacing: '-0.025em' }}>{title}</h2>
         {showCoachSelection && (
           <button 
             onClick={selectAllCoaches}
@@ -269,7 +269,7 @@ export default function AttendanceManager({
         </div>
       )}
 
-      <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', flexWrap: 'wrap', alignItems: 'center' }}>
+      <div className="attendance-filter-row" style={{ display: 'flex', gap: '16px', marginBottom: '32px', flexWrap: 'wrap', alignItems: 'center' }}>
         <div style={{ display: 'flex', gap: '8px' }}>
           {groups.length > 1 && (
             <select 
@@ -323,7 +323,7 @@ export default function AttendanceManager({
           </select>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: 'auto', background: 'var(--bg-secondary)', padding: '8px 16px', borderRadius: '12px', border: '1px solid var(--border-glass)' }}>
+        <div className="attendance-legend" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginLeft: 'auto', background: 'var(--bg-secondary)', padding: '8px 16px', borderRadius: '12px', border: '1px solid var(--border-glass)' }}>
           <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Keterangan</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div style={{ width: '20px', height: '20px', borderRadius: '4px', background: 'var(--status-hadir)', boxShadow: '0 0 10px rgba(16, 185, 129, 0.4)' }}></div>

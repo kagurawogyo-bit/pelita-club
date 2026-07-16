@@ -604,3 +604,85 @@ tr:hover .sticky-col-name {
     overflow: visible !important;
   }
 }
+
+/* ============================================
+   MOBILE RESPONSIVE - Attendance Table
+   ============================================ */
+@media (max-width: 768px) {
+  /* Shrink the scrollable container height */
+  .attendance-table-container {
+    max-height: calc(100vh - 220px) !important;
+  }
+
+  /* Reduce all header/cell padding */
+  .attendance-table th,
+  .attendance-table td {
+    padding: 4px 2px !important;
+    font-size: 0.6rem !important;
+  }
+
+  /* Compact NO column */
+  .attendance-table th.sticky-col-no,
+  .attendance-table td.sticky-col-no {
+    width: 28px !important;
+    min-width: 28px !important;
+    padding: 6px 4px !important;
+    font-size: 0.65rem !important;
+  }
+
+  /* Compact NAMA column */
+  .attendance-table th.sticky-col-name,
+  .attendance-table td.sticky-col-name {
+    min-width: 100px !important;
+    max-width: 130px !important;
+    padding: 6px 6px !important;
+    font-size: 0.7rem !important;
+    word-break: break-word;
+    line-height: 1.2;
+  }
+
+  /* Smaller attendance checkbox/dot */
+  .attendance-table tbody td > div {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 0.65rem !important;
+    border-radius: 4px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Adjust sticky left position for smaller NO column */
+  .attendance-table thead th.sticky-col-name,
+  .attendance-table tbody td.sticky-col-name {
+    left: 28px !important;
+  }
+
+  /* Second header row offset for isCoach double-header */
+  .attendance-table thead tr:nth-child(2) th {
+    top: 36px !important;
+  }
+
+  /* Compact page title */
+  .attendance-page-title {
+    font-size: 1.4rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* Compact filter row */
+  .attendance-filter-row {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .attendance-filter-row select {
+    font-size: 0.8rem !important;
+    padding: 6px 8px !important;
+  }
+
+  /* Compact legend */
+  .attendance-legend {
+    font-size: 0.75rem !important;
+    padding: 8px 12px !important;
+    gap: 12px !important;
+  }
+}
