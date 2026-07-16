@@ -90,6 +90,15 @@ export default function AttendanceManager({
     "M5P1", "M5P2"
   ];
 
+  // Warna cerah per kelompok sesi (M1-M5)
+  const colGroupColors = [
+    { bg: '#dbeafe', border: '#3b82f6', text: '#1e40af', headerBg: '#bfdbfe' }, // M1: Biru
+    { bg: '#ede9fe', border: '#7c3aed', text: '#5b21b6', headerBg: '#ddd6fe' }, // M2: Ungu
+    { bg: '#d1fae5', border: '#059669', text: '#064e3b', headerBg: '#a7f3d0' }, // M3: Hijau
+    { bg: '#fef3c7', border: '#d97706', text: '#92400e', headerBg: '#fde68a' }, // M4: Kuning
+    { bg: '#ffe4e6', border: '#e11d48', text: '#9f1239', headerBg: '#fecdd3' }, // M5: Merah
+  ];
+
   const statuses = ["-", "✓"];
 
   const statusStyles: Record<string, { bg: string, color: string, border: string, shadow: string }> = {
@@ -334,21 +343,22 @@ export default function AttendanceManager({
             <thead>
               {isCoach ? (
                 <>
-                  <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    <th rowSpan={2} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2px solid var(--table-border-group)' }}>NO</th>
-                    <th rowSpan={2} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2.5px solid var(--table-border-group)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                  <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <th rowSpan={2} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>NO</th>
+                    <th rowSpan={2} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2.5px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
                     {columns.map((col, idx) => {
-                      const isOdd = idx % 2 === 0;
+                      const g = colGroupColors[Math.floor(idx / 2) % 5];
                       return (
                         <th 
                           key={col} 
                           colSpan={2} 
                           style={{ 
                             padding: '10px 8px', 
-                            fontWeight: 800, 
-                            borderBottom: '2px solid var(--table-border-group)',
-                            borderRight: '2.5px solid var(--table-border-group)',
-                            backgroundColor: isOdd ? 'var(--table-bg-odd)' : 'var(--table-bg-even)'
+                            fontWeight: 800,
+                            color: g.text,
+                            borderBottom: `2px solid ${g.border}`,
+                            borderRight: `2.5px solid ${g.border}`,
+                            backgroundColor: g.headerBg
                           }}
                         >
                           {col}
@@ -356,34 +366,34 @@ export default function AttendanceManager({
                       );
                     })}
                   </tr>
-                  <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)', fontSize: '0.7rem', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                  <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)', fontSize: '0.7rem', textTransform: 'uppercase' }}>
                     {columns.map((col, idx) => {
-                      const isOdd = idx % 2 === 0;
-                      const bgColor = isOdd ? 'var(--table-bg-odd)' : 'var(--table-bg-even)';
+                      const g = colGroupColors[Math.floor(idx / 2) % 5];
                       return (
                         <>
-                          <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: '1.5px solid var(--table-border)', fontSize: '0.7rem', backgroundColor: bgColor }}>ku sd</th>
-                          <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: '2.5px solid var(--table-border-group)', fontSize: '0.7rem', backgroundColor: bgColor }}>ku smp-sma</th>
+                          <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku sd</th>
+                          <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `2.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku smp-sma</th>
                         </>
                       );
                     })}
                   </tr>
                 </>
               ) : (
-                <tr style={{ background: 'var(--bg-primary)', borderBottom: '2.5px solid var(--table-border-group)', fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  <th className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderRight: '2px solid var(--table-border-group)', borderBottom: '2.5px solid var(--table-border-group)' }}>NO</th>
-                  <th className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderRight: '2.5px solid var(--table-border-group)', borderBottom: '2.5px solid var(--table-border-group)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                <tr style={{ background: 'var(--bg-primary)', borderBottom: '2.5px solid var(--table-border-group)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  <th className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderRight: '2px solid var(--table-border-group)', borderBottom: '2.5px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>NO</th>
+                  <th className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderRight: '2.5px solid var(--table-border-group)', borderBottom: '2.5px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
                   {columns.map((col, idx) => {
-                    const isOdd = idx % 2 === 0;
+                    const g = colGroupColors[Math.floor(idx / 2) % 5];
                     return (
                       <th 
                         key={col} 
                         style={{ 
                           padding: '20px 8px', 
                           fontWeight: 800,
-                          borderRight: '2px solid var(--table-border-group)',
-                          borderBottom: '2.5px solid var(--table-border-group)',
-                          backgroundColor: isOdd ? 'var(--table-bg-odd)' : 'var(--table-bg-even)'
+                          color: g.text,
+                          borderRight: `2px solid ${g.border}`,
+                          borderBottom: `2.5px solid ${g.border}`,
+                          backgroundColor: g.headerBg
                         }}
                       >
                         {col}
@@ -423,12 +433,11 @@ export default function AttendanceManager({
                         const styleSd = statusStyles[statusSd];
                         const styleSmp = statusStyles[statusSmp];
 
-                        const isOdd = idx % 2 === 0;
-                        const cellBg = isOdd ? 'var(--table-bg-odd)' : 'var(--table-bg-even)';
+                        const g = colGroupColors[Math.floor(idx / 2) % 5];
 
                         return (
                           <>
-                            <td key={`${col}-sd`} style={{ padding: '6px 2px', borderRight: '1.5px solid var(--table-border)', backgroundColor: cellBg, borderBottom: '1.5px solid var(--table-border)' }}>
+                            <td key={`${col}-sd`} style={{ padding: '6px 2px', borderRight: `1.5px solid ${g.border}`, backgroundColor: g.bg, borderBottom: `1.5px solid ${g.border}` }}>
                               <div 
                                 onClick={() => handleToggle(student.id, colSd)}
                                 style={{ 
@@ -462,7 +471,7 @@ export default function AttendanceManager({
                                 {statusSd === "✓" ? "✓" : "-"}
                               </div>
                             </td>
-                            <td key={`${col}-smp`} style={{ padding: '6px 2px', borderRight: '2.5px solid var(--table-border-group)', backgroundColor: cellBg, borderBottom: '1.5px solid var(--table-border)' }}>
+                            <td key={`${col}-smp`} style={{ padding: '6px 2px', borderRight: `2.5px solid ${g.border}`, backgroundColor: g.bg, borderBottom: `1.5px solid ${g.border}` }}>
                               <div 
                                 onClick={() => handleToggle(student.id, colSmp)}
                                 style={{ 
@@ -504,11 +513,10 @@ export default function AttendanceManager({
                         const status = (attendanceData[student.id] && attendanceData[student.id][col]) || "-";
                         const style = statusStyles[status];
                         
-                        const isOdd = idx % 2 === 0;
-                        const cellBg = isOdd ? 'var(--table-bg-odd)' : 'var(--table-bg-even)';
+                        const g = colGroupColors[Math.floor(idx / 2) % 5];
 
                         return (
-                          <td key={col} style={{ padding: '8px 4px', borderRight: '2px solid var(--table-border-group)', backgroundColor: cellBg, borderBottom: '1.5px solid var(--table-border)' }}>
+                          <td key={col} style={{ padding: '8px 4px', borderRight: `2px solid ${g.border}`, backgroundColor: g.bg, borderBottom: `1.5px solid ${g.border}` }}>
                             <div 
                               onClick={() => handleToggle(student.id, col)}
                               style={{ 
