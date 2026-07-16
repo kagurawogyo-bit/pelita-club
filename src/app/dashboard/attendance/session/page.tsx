@@ -18,11 +18,11 @@ export default function CoachSessionPage() {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
 
   const columns = [
-    "M1P1", "M1P2", "M1P3", "M1P4", "M1P5", 
-    "M2P1", "M2P2", "M2P3", "M2P4", "M2P5", 
-    "M3P1", "M3P2", "M3P3", "M3P4", "M3P5", 
-    "M4P1", "M4P2", "M4P3", "M4P4", "M4P3",
-    "M4P4", "M4P5", "M5P1", "M5P2", "M5P3", "M5P4", "M5P5"
+    "M1P1", "M1P2", 
+    "M2P1", "M2P2", 
+    "M3P1", "M3P2", 
+    "M4P1", "M4P2",
+    "M5P1", "M5P2"
   ];
 
   const months = [
