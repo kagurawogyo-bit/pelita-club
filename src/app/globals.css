@@ -26,6 +26,12 @@
   
   --radius-md: 12px;
   --radius-lg: 20px;
+
+  /* Solid Table Styles (No transparency) */
+  --table-border: #cbd5e1;
+  --table-border-group: #64748b;
+  --table-bg-odd: #f1f5f9;
+  --table-bg-even: #ffffff;
 }
 
 [data-theme='dark'] {
@@ -44,6 +50,12 @@
   --sidebar-active: rgba(56, 189, 248, 0.1);
   --sidebar-text: #94a3b8;
   --sidebar-text-active: #38bdf8;
+
+  /* Solid Table Styles (No transparency) */
+  --table-border: #334155;
+  --table-border-group: #64748b;
+  --table-bg-odd: #1e293b;
+  --table-bg-even: #0f172a;
 }
 
 * {
