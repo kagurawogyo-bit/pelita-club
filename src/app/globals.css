@@ -535,6 +535,10 @@ a {
   border-right: 1px solid var(--border-glass) !important;
 }
 
+/* Name display: desktop shows full, mobile shows nickname */
+.name-desktop { display: block; }
+.name-mobile  { display: none; }
+
 /* Vertical Sticky Table Headers */
 .attendance-table-container {
   overflow: auto;
@@ -609,6 +613,10 @@ tr:hover .sticky-col-name {
    MOBILE RESPONSIVE - Attendance Table
    ============================================ */
 @media (max-width: 768px) {
+  /* Show nickname only on mobile, hide full name */
+  .name-desktop { display: none !important; }
+  .name-mobile  { display: block !important; }
+
   /* Shrink the scrollable container height */
   .attendance-table-container {
     max-height: calc(100vh - 220px) !important;
@@ -617,8 +625,8 @@ tr:hover .sticky-col-name {
   /* Reduce all header/cell padding */
   .attendance-table th,
   .attendance-table td {
-    padding: 4px 2px !important;
-    font-size: 0.6rem !important;
+    padding: 4px 3px !important;
+    font-size: 0.65rem !important;
   }
 
   /* Compact NO column */
@@ -630,24 +638,31 @@ tr:hover .sticky-col-name {
     font-size: 0.65rem !important;
   }
 
-  /* Compact NAMA column */
+  /* Compact NAMA column — nickname fits nicely in 90px */
   .attendance-table th.sticky-col-name,
   .attendance-table td.sticky-col-name {
-    min-width: 100px !important;
-    max-width: 130px !important;
+    min-width: 80px !important;
+    max-width: 110px !important;
     padding: 6px 6px !important;
-    font-size: 0.7rem !important;
+    font-size: 0.78rem !important;
     overflow: hidden;
     white-space: nowrap;
     line-height: 1.3;
   }
 
-  /* Smaller attendance checkbox/dot */
+  /* Wider attendance columns — min 42px per column for easy tapping */
+  .attendance-table th:not(.sticky-col-no):not(.sticky-col-name),
+  .attendance-table td:not(.sticky-col-no):not(.sticky-col-name) {
+    min-width: 42px !important;
+    padding: 4px 2px !important;
+  }
+
+  /* Larger attendance tap target */
   .attendance-table tbody td > div {
-    width: 22px !important;
-    height: 22px !important;
-    font-size: 0.65rem !important;
-    border-radius: 4px !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.75rem !important;
+    border-radius: 6px !important;
     margin: 0 auto !important;
   }
 
