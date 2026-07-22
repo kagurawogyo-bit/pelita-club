@@ -270,7 +270,7 @@ export default function AttendanceManager({
       )}
 
       <div className="attendance-filter-row" style={{ display: 'flex', gap: '16px', marginBottom: '32px', flexWrap: 'wrap', alignItems: 'center' }}>
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
           {groups.length > 1 && (
             <select 
               className="input-field" 
@@ -417,9 +417,11 @@ export default function AttendanceManager({
                   <tr key={student.id} style={{ borderBottom: '1.5px solid var(--table-border)', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(14, 165, 233, 0.04)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
                     <td className="sticky-col-no" style={{ padding: '16px', textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.85rem', borderRight: '2px solid var(--table-border-group)', backgroundColor: 'var(--table-bg-even)', borderBottom: '1.5px solid var(--table-border)' }}>{actualIndex}</td>
                     <td className="sticky-col-name" style={{ padding: '16px', textAlign: 'left', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.95rem', borderRight: '2.5px solid var(--table-border-group)', backgroundColor: 'var(--table-bg-even)', borderBottom: '1.5px solid var(--table-border)' }}>
-                      {student.profile?.namaLengkap || student.namaLengkap}
+                      <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {student.profile?.namaLengkap || student.namaLengkap}
+                      </div>
                       {(student.profile?.namaPanggilan || student.namaPanggilan) ? (
-                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px', fontWeight: 500 }}>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '2px', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                           ({student.profile?.namaPanggilan || student.namaPanggilan})
                         </div>
                       ) : null}
