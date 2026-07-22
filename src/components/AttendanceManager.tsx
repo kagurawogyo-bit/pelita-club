@@ -429,7 +429,7 @@ export default function AttendanceManager({
                         ) : null}
                       </div>
                       {/* Mobile: nickname only (fallback to namaLengkap) */}
-                      <div className="name-mobile" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 700 }}>
+                      <div className="name-mobile" style={{ whiteSpace: 'nowrap', fontWeight: 700 }}>
                         {student.profile?.namaPanggilan || student.namaPanggilan || student.profile?.namaLengkap || student.namaLengkap}
                       </div>
                     </td>
