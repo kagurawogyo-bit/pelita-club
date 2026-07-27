@@ -372,8 +372,8 @@ export default function AttendanceManager({
               {isCoach ? (
                 <>
                   <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    <th rowSpan={3} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>NO</th>
-                    <th rowSpan={3} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2.5px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                    <th rowSpan={2} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>NO</th>
+                    <th rowSpan={2} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2.5px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
                     {columns.map((col, idx) => {
                       const g = colGroupColors[Math.floor(idx / 2) % 5];
                       return (
@@ -394,42 +394,83 @@ export default function AttendanceManager({
                       );
                     })}
                   </tr>
-                  <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)' }}>
-                    {columns.map((col, idx) => {
-                      const g = colGroupColors[Math.floor(idx / 2) % 5];
-                      return (
-                        <th key={`${col}-date`} colSpan={3} style={{ padding: '4px 8px', borderRight: `2.5px solid ${g.border}`, backgroundColor: g.headerBg }}>
-                          <input 
-                            type="text" 
-                            placeholder="Tgl..." 
-                            value={columnDates[col] !== undefined ? columnDates[col] : ""} 
-                            onChange={(e) => setColumnDates(prev => ({...prev, [col]: e.target.value}))}
-                            onBlur={(e) => handleDateChange(col, e.target.value)}
-                            disabled={readOnly}
-                            style={{ 
-                              width: '100%', 
-                              textAlign: 'center', 
-                              fontSize: '0.75rem', 
-                              padding: '4px', 
-                              border: '1px solid var(--border-glass)', 
-                              borderRadius: '4px',
-                              background: 'var(--bg-primary)',
-                              color: 'var(--text-primary)',
-                              fontWeight: 600
-                            }} 
-                          />
-                        </th>
-                      );
-                    })}
-                  </tr>
                   <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)', fontSize: '0.7rem', textTransform: 'uppercase' }}>
                     {columns.map((col, idx) => {
                       const g = colGroupColors[Math.floor(idx / 2) % 5];
+                      const colSd = `${col}_SD`;
+                      const colSmp = `${col}_SMP`;
+                      const colSma = `${col}_SMA`;
                       return (
                         <>
-                          <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku sd</th>
-                          <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku smp</th>
-                          <th key={`${col}-sma`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `2.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku sma</th>
+                          <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>
+                            ku sd<br/>
+                            <input 
+                              type="text" 
+                              placeholder="Tgl..." 
+                              value={columnDates[colSd] !== undefined ? columnDates[colSd] : ""} 
+                              onChange={(e) => setColumnDates(prev => ({...prev, [colSd]: e.target.value}))}
+                              onBlur={(e) => handleDateChange(colSd, e.target.value)}
+                              disabled={readOnly}
+                              style={{ 
+                                width: '100%', 
+                                textAlign: 'center', 
+                                fontSize: '0.65rem', 
+                                padding: '2px', 
+                                marginTop: '4px',
+                                border: `1px solid ${g.border}`, 
+                                borderRadius: '4px',
+                                background: 'rgba(255,255,255,0.7)',
+                                color: g.text,
+                                fontWeight: 600
+                              }} 
+                            />
+                          </th>
+                          <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>
+                            ku smp<br/>
+                            <input 
+                              type="text" 
+                              placeholder="Tgl..." 
+                              value={columnDates[colSmp] !== undefined ? columnDates[colSmp] : ""} 
+                              onChange={(e) => setColumnDates(prev => ({...prev, [colSmp]: e.target.value}))}
+                              onBlur={(e) => handleDateChange(colSmp, e.target.value)}
+                              disabled={readOnly}
+                              style={{ 
+                                width: '100%', 
+                                textAlign: 'center', 
+                                fontSize: '0.65rem', 
+                                padding: '2px', 
+                                marginTop: '4px',
+                                border: `1px solid ${g.border}`, 
+                                borderRadius: '4px',
+                                background: 'rgba(255,255,255,0.7)',
+                                color: g.text,
+                                fontWeight: 600
+                              }} 
+                            />
+                          </th>
+                          <th key={`${col}-sma`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `2.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>
+                            ku sma<br/>
+                            <input 
+                              type="text" 
+                              placeholder="Tgl..." 
+                              value={columnDates[colSma] !== undefined ? columnDates[colSma] : ""} 
+                              onChange={(e) => setColumnDates(prev => ({...prev, [colSma]: e.target.value}))}
+                              onBlur={(e) => handleDateChange(colSma, e.target.value)}
+                              disabled={readOnly}
+                              style={{ 
+                                width: '100%', 
+                                textAlign: 'center', 
+                                fontSize: '0.65rem', 
+                                padding: '2px', 
+                                marginTop: '4px',
+                                border: `1px solid ${g.border}`, 
+                                borderRadius: '4px',
+                                background: 'rgba(255,255,255,0.7)',
+                                color: g.text,
+                                fontWeight: 600
+                              }} 
+                            />
+                          </th>
                         </>
                       );
                     })}
