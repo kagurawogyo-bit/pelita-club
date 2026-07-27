@@ -154,8 +154,9 @@ export default function AttendanceManager({
         const student = initialStudents.find(s => s.id === studentId);
         const ageGroup = student?.kelompokUmur || "";
         const isSd = ["Di bawah 7 tahun", "7-8 tahun", "9-10 tahun", "11-12 tahun"].includes(ageGroup);
+        const isSmp = ["13-14 tahun"].includes(ageGroup);
         const coachCol = eventType === "REGULAR" 
-          ? (isSd ? `${col}_SD` : `${col}_SMP_SMA`)
+          ? (isSd ? `${col}_SD` : (isSmp ? `${col}_SMP` : `${col}_SMA`))
           : col;
 
         selectedCoachIds.forEach(coachId => {
@@ -351,7 +352,7 @@ export default function AttendanceManager({
                       return (
                         <th 
                           key={col} 
-                          colSpan={2} 
+                          colSpan={3} 
                           style={{ 
                             padding: '10px 8px', 
                             fontWeight: 800,
@@ -372,7 +373,8 @@ export default function AttendanceManager({
                       return (
                         <>
                           <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku sd</th>
-                          <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `2.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku smp-sma</th>
+                          <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku smp</th>
+                          <th key={`${col}-sma`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `2.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>ku sma</th>
                         </>
                       );
                     })}
@@ -406,7 +408,7 @@ export default function AttendanceManager({
             <tbody>
               {processedStudents.length === 0 ? (
                 <tr>
-                  <td colSpan={isCoach ? (columns.length * 2) + 2 : columns.length + 2} style={{ padding: '48px', color: 'var(--text-secondary)', fontSize: '1rem', backgroundColor: 'var(--table-bg-even)' }}>
+                  <td colSpan={isCoach ? (columns.length * 3) + 2 : columns.length + 2} style={{ padding: '48px', color: 'var(--text-secondary)', fontSize: '1rem', backgroundColor: 'var(--table-bg-even)' }}>
                     {title === "Absensi Pelatih" ? "Tidak ada data pelatih ditemukan." : "Tidak ada data siswa ditemukan."}
                   </td>
                 </tr>
@@ -436,11 +438,14 @@ export default function AttendanceManager({
                     {isCoach ? (
                       columns.map((col, idx) => {
                         const colSd = `${col}_SD`;
-                        const colSmp = `${col}_SMP_SMA`;
+                        const colSmp = `${col}_SMP`;
+                        const colSma = `${col}_SMA`;
                         const statusSd = (attendanceData[student.id] && attendanceData[student.id][colSd]) || "-";
                         const statusSmp = (attendanceData[student.id] && attendanceData[student.id][colSmp]) || "-";
+                        const statusSma = (attendanceData[student.id] && attendanceData[student.id][colSma]) || "-";
                         const styleSd = statusStyles[statusSd];
                         const styleSmp = statusStyles[statusSmp];
+                        const styleSma = statusStyles[statusSma];
 
                         const g = colGroupColors[Math.floor(idx / 2) % 5];
 
@@ -480,7 +485,7 @@ export default function AttendanceManager({
                                 {statusSd === "✓" ? "✓" : "-"}
                               </div>
                             </td>
-                            <td key={`${col}-smp`} style={{ padding: '6px 2px', borderRight: `2.5px solid ${g.border}`, backgroundColor: g.bg, borderBottom: `1.5px solid ${g.border}` }}>
+                            <td key={`${col}-smp`} style={{ padding: '6px 2px', borderRight: `1.5px solid ${g.border}`, backgroundColor: g.bg, borderBottom: `1.5px solid ${g.border}` }}>
                               <div 
                                 onClick={() => handleToggle(student.id, colSmp)}
                                 style={{ 
@@ -512,6 +517,40 @@ export default function AttendanceManager({
                                 }}
                               >
                                 {statusSmp === "✓" ? "✓" : "-"}
+                              </div>
+                            </td>
+                            <td key={`${col}-sma`} style={{ padding: '6px 2px', borderRight: `2.5px solid ${g.border}`, backgroundColor: g.bg, borderBottom: `1.5px solid ${g.border}` }}>
+                              <div 
+                                onClick={() => handleToggle(student.id, colSma)}
+                                style={{ 
+                                  width: '32px', height: '32px', 
+                                  margin: '0 auto', 
+                                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                  borderRadius: '6px',
+                                  background: styleSma.bg,
+                                  color: styleSma.color,
+                                  border: styleSma.border,
+                                  boxShadow: styleSma.shadow,
+                                  cursor: readOnly ? 'default' : 'pointer',
+                                  userSelect: 'none',
+                                  transition: 'all 0.2s',
+                                  fontWeight: 800,
+                                  fontSize: '0.85rem'
+                                }}
+                                onMouseOver={(e) => {
+                                    if (statusSma === "-" && !readOnly) {
+                                        e.currentTarget.style.borderColor = 'var(--accent-primary)';
+                                        e.currentTarget.style.transform = 'scale(1.1)';
+                                    }
+                                }}
+                                onMouseOut={(e) => {
+                                    if (statusSma === "-" && !readOnly) {
+                                        e.currentTarget.style.borderColor = 'var(--table-border)';
+                                        e.currentTarget.style.transform = 'scale(1)';
+                                    }
+                                }}
+                              >
+                                {statusSma === "✓" ? "✓" : "-"}
                               </div>
                             </td>
                           </>

@@ -90,6 +90,7 @@ export async function POST(req: Request) {
       });
 
       let isSd = true;
+      let isSmp = false;
       if (student?.profile?.tanggalLahir) {
         const birthDate = new Date(student.profile.tanggalLahir);
         const today = new Date();
@@ -98,13 +99,16 @@ export async function POST(req: Request) {
         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
           umur--;
         }
-        if (umur >= 13) {
-          isSd = false; // SMP-SMA
+        if (umur >= 13 && umur <= 14) {
+          isSd = false;
+          isSmp = true;
+        } else if (umur >= 15) {
+          isSd = false; // SMA is fallback for >= 15
         }
       }
 
       const coachCol = eventType === "REGULAR" 
-        ? (isSd ? `${column}_SD` : `${column}_SMP_SMA`)
+        ? (isSd ? `${column}_SD` : (isSmp ? `${column}_SMP` : `${column}_SMA`))
         : column;
 
       for (const coachId of coachIds) {
