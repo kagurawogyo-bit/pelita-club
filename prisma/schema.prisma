@@ -94,3 +94,14 @@ model GridAttendance {
 
   @@unique([userId, month, year, column, eventType])
 }
+
+model GridColumnDate {
+  id        String   @id @default(uuid())
+  month     Int
+  year      Int
+  column    String
+  eventType String   @default("REGULAR") // "REGULAR", "CBB"
+  dateText  String
+
+  @@unique([month, year, eventType, column])
+}

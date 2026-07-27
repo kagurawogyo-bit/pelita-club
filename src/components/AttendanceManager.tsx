@@ -36,6 +36,7 @@ export default function AttendanceManager({
   const [loading, setLoading] = useState(false);
 
   const [attendanceData, setAttendanceData] = useState<Record<string, Record<string, string>>>({});
+  const [columnDates, setColumnDates] = useState<Record<string, string>>({});
   const [searchQuery, setSearchQuery] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState<number | "all">(100);
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,10 +51,17 @@ export default function AttendanceManager({
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/attendance/grid?month=${selectedMonth}&year=${selectedYear}&eventType=${eventType}`);
+        const [res, datesRes] = await Promise.all([
+          fetch(`/api/attendance/grid?month=${selectedMonth}&year=${selectedYear}&eventType=${eventType}`),
+          fetch(`/api/attendance/grid/dates?month=${selectedMonth}&year=${selectedYear}&eventType=${eventType}`)
+        ]);
         if (res.ok) {
           const data = await res.json();
           setAttendanceData(data);
+        }
+        if (datesRes.ok) {
+          const datesData = await datesRes.json();
+          setColumnDates(datesData);
         }
       } catch (error) {
         console.error("Fetch attendance error:", error);
@@ -183,6 +191,25 @@ export default function AttendanceManager({
       });
     } catch (error) {
       console.error("Save attendance error:", error);
+    }
+  };
+
+  const handleDateChange = async (col: string, value: string) => {
+    if (readOnly) return;
+    try {
+      await fetch('/api/attendance/grid/dates', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          month: selectedMonth,
+          year: selectedYear,
+          eventType,
+          column: col,
+          dateText: value
+        })
+      });
+    } catch (error) {
+      console.error("Save date error:", error);
     }
   };
 
@@ -345,8 +372,8 @@ export default function AttendanceManager({
               {isCoach ? (
                 <>
                   <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    <th rowSpan={2} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>NO</th>
-                    <th rowSpan={2} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2.5px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
+                    <th rowSpan={3} className="sticky-col-no" style={{ padding: '20px 16px', textAlign: 'left', width: '60px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>NO</th>
+                    <th rowSpan={3} className="sticky-col-name" style={{ padding: '20px 16px', textAlign: 'left', minWidth: '200px', borderBottom: '2px solid var(--table-border-group)', borderRight: '2.5px solid var(--table-border-group)', color: 'var(--text-secondary)' }}>{title === "Absensi Pelatih" ? "NAMA PELATIH" : "NAMA SISWA"}</th>
                     {columns.map((col, idx) => {
                       const g = colGroupColors[Math.floor(idx / 2) % 5];
                       return (
@@ -363,6 +390,34 @@ export default function AttendanceManager({
                           }}
                         >
                           {col}
+                        </th>
+                      );
+                    })}
+                  </tr>
+                  <tr style={{ background: 'var(--bg-primary)', borderBottom: '2px solid var(--table-border-group)' }}>
+                    {columns.map((col, idx) => {
+                      const g = colGroupColors[Math.floor(idx / 2) % 5];
+                      return (
+                        <th key={`${col}-date`} colSpan={3} style={{ padding: '4px 8px', borderRight: `2.5px solid ${g.border}`, backgroundColor: g.headerBg }}>
+                          <input 
+                            type="text" 
+                            placeholder="Tgl..." 
+                            value={columnDates[col] !== undefined ? columnDates[col] : ""} 
+                            onChange={(e) => setColumnDates(prev => ({...prev, [col]: e.target.value}))}
+                            onBlur={(e) => handleDateChange(col, e.target.value)}
+                            disabled={readOnly}
+                            style={{ 
+                              width: '100%', 
+                              textAlign: 'center', 
+                              fontSize: '0.75rem', 
+                              padding: '4px', 
+                              border: '1px solid var(--border-glass)', 
+                              borderRadius: '4px',
+                              background: 'var(--bg-primary)',
+                              color: 'var(--text-primary)',
+                              fontWeight: 600
+                            }} 
+                          />
                         </th>
                       );
                     })}
