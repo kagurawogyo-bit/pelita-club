@@ -402,7 +402,7 @@ export default function AttendanceManager({
                       const colSma = `${col}_SMA`;
                       return (
                         <>
-                          <th key={`${col}-sd`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>
+                          <th key={`${col}-sd`} style={{ padding: '10px 4px', fontWeight: 800, borderRight: `1.5px solid ${g.border}`, fontSize: '0.75rem', backgroundColor: g.bg, color: g.text }}>
                             ku sd<br/>
                             <input 
                               type="text" 
@@ -413,19 +413,20 @@ export default function AttendanceManager({
                               disabled={readOnly}
                               style={{ 
                                 width: '100%', 
+                                minWidth: '45px',
                                 textAlign: 'center', 
-                                fontSize: '0.65rem', 
-                                padding: '2px', 
-                                marginTop: '4px',
+                                fontSize: '0.8rem', 
+                                padding: '4px', 
+                                marginTop: '6px',
                                 border: `1px solid ${g.border}`, 
                                 borderRadius: '4px',
-                                background: 'rgba(255,255,255,0.7)',
+                                background: 'rgba(255,255,255,0.85)',
                                 color: g.text,
-                                fontWeight: 600
+                                fontWeight: 700
                               }} 
                             />
                           </th>
-                          <th key={`${col}-smp`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `1.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>
+                          <th key={`${col}-smp`} style={{ padding: '10px 4px', fontWeight: 800, borderRight: `1.5px solid ${g.border}`, fontSize: '0.75rem', backgroundColor: g.bg, color: g.text }}>
                             ku smp<br/>
                             <input 
                               type="text" 
@@ -436,19 +437,20 @@ export default function AttendanceManager({
                               disabled={readOnly}
                               style={{ 
                                 width: '100%', 
+                                minWidth: '45px',
                                 textAlign: 'center', 
-                                fontSize: '0.65rem', 
-                                padding: '2px', 
-                                marginTop: '4px',
+                                fontSize: '0.8rem', 
+                                padding: '4px', 
+                                marginTop: '6px',
                                 border: `1px solid ${g.border}`, 
                                 borderRadius: '4px',
-                                background: 'rgba(255,255,255,0.7)',
+                                background: 'rgba(255,255,255,0.85)',
                                 color: g.text,
-                                fontWeight: 600
+                                fontWeight: 700
                               }} 
                             />
                           </th>
-                          <th key={`${col}-sma`} style={{ padding: '8px 4px', fontWeight: 700, borderRight: `2.5px solid ${g.border}`, fontSize: '0.7rem', backgroundColor: g.bg, color: g.text }}>
+                          <th key={`${col}-sma`} style={{ padding: '10px 4px', fontWeight: 800, borderRight: `2.5px solid ${g.border}`, fontSize: '0.75rem', backgroundColor: g.bg, color: g.text }}>
                             ku sma<br/>
                             <input 
                               type="text" 
@@ -459,15 +461,16 @@ export default function AttendanceManager({
                               disabled={readOnly}
                               style={{ 
                                 width: '100%', 
+                                minWidth: '45px',
                                 textAlign: 'center', 
-                                fontSize: '0.65rem', 
-                                padding: '2px', 
-                                marginTop: '4px',
+                                fontSize: '0.8rem', 
+                                padding: '4px', 
+                                marginTop: '6px',
                                 border: `1px solid ${g.border}`, 
                                 borderRadius: '4px',
-                                background: 'rgba(255,255,255,0.7)',
+                                background: 'rgba(255,255,255,0.85)',
                                 color: g.text,
-                                fontWeight: 600
+                                fontWeight: 700
                               }} 
                             />
                           </th>
