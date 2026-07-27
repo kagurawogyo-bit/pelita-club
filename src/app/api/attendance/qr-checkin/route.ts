@@ -132,6 +132,42 @@ export async function POST(req: Request) {
         }
     }
 
+    // Auto-fill tanggal untuk kolom pelatih (KU SD/SMP/SMA) jika masih kosong
+    const today = new Date();
+    const todayStr = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}`;
+    
+    const existingDate = await prisma.gridColumnDate.findUnique({
+      where: {
+        month_year_eventType_column: {
+          month,
+          year,
+          eventType,
+          column: coachCol
+        }
+      }
+    });
+
+    if (!existingDate || !existingDate.dateText) {
+      await prisma.gridColumnDate.upsert({
+        where: {
+          month_year_eventType_column: {
+            month,
+            year,
+            eventType,
+            column: coachCol
+          }
+        },
+        update: { dateText: todayStr }, // Jika ada tapi kosong, update
+        create: {
+          month,
+          year,
+          eventType,
+          column: coachCol,
+          dateText: todayStr
+        }
+      });
+    }
+
 
     return NextResponse.json({
       message: "Kehadiran berhasil dicatat!",
